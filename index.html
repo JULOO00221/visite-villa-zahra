@@ -201,7 +201,7 @@ body.clean .chips,body.clean .hint{display:none}
 
   <div class="chips" id="chips"></div>
 
-  <p class="hint">Visite guidée de la villa F3 « ZAHRA » — programme <strong>As Salam Sa&nbsp;Keur</strong>, KATOS Construction. La caméra parcourt la vue en plan 3D pièce par pièce : les surfaces affichées sont celles du plan du rez-de-chaussée. Pour obtenir un fichier vidéo, passez en plein écran, reprenez au début et enregistrez votre écran. Durée de la visite : environ 1&nbsp;min&nbsp;11&nbsp;s.</p>
+  <p class="hint">Visite guidée de la villa F3 « ZAHRA » — programme <strong>As Salam Sa&nbsp;Keur</strong>, KATOS Construction. La caméra parcourt la vue en plan 3D pièce par pièce : les surfaces affichées sont celles du plan du rez-de-chaussée. Pour obtenir un fichier vidéo, passez en plein écran, reprenez au début et enregistrez votre écran. Durée de la visite : environ 1&nbsp;min&nbsp;15&nbsp;s.</p>
 </div>
 
 <script>
@@ -210,13 +210,13 @@ const SRC = {
   facade: "img/facade.jpg",
   persp:  "img/persp.jpg",
   plan:   "img/plan.jpg",
-  aerien: "img/aerien.jpg",
-  cour:   "img/cour.jpg",
+  toit:   "img/toit.jpg",
+  rue:    "img/rue.jpg",
   logo:   "img/logo.png"
 };
 const NAT = {
-  facade:[2428,1242], persp:[1572,1029], plan:[2960,4252],
-  aerien:[1780,999],  cour:[1780,976]
+  facade:[2000,1124], persp:[2000,1124], plan:[2960,4252],
+  toit:  [2000,1124], rue:  [2000,1124]
 };
 document.getElementById('logo').src = SRC.logo;
 
@@ -240,7 +240,7 @@ const P = {
 
 const scenes = [
 { id:'ouverture', chip:'Ouverture', img:'facade', dur:4000, bg:'#081538', vig:1, scrim:1,
-  from:{zoom:1.14,fx:.5,fy:.56}, to:{zoom:1.0,fx:.5,fy:.52},
+  from:{zoom:1.12,fx:.52,fy:.50}, to:{zoom:1.0,fx:.50,fy:.50},
   html:`<div class="hero">
       <div class="kicker">AS SALAM SA KEUR</div>
       <div class="l1">VILLA</div>
@@ -250,12 +250,16 @@ const scenes = [
     </div>` },
 
 { id:'facade', chip:'Façade', img:'facade', dur:4200, bg:'#081538', vig:1, scrim:1,
-  from:{zoom:1.0,fx:.5,fy:.52}, to:{zoom:1.1,fx:.46,fy:.5},
-  html:cap('EXTÉRIEUR','Façade principale',null,'Implantation sur un terrain de 150 m² minimum.') },
+  from:{zoom:1.0,fx:.50,fy:.50}, to:{zoom:1.12,fx:.44,fy:.52},
+  html:cap('EXTÉRIEUR','Façade principale',null,'Entrée abritée, stationnement intégré sous auvent.') },
 
 { id:'perspective', chip:'Perspective', img:'persp', dur:4000, bg:'#081538', vig:1, scrim:1,
-  from:{zoom:1.02,fx:.52,fy:.5}, to:{zoom:1.14,fx:.44,fy:.52},
+  from:{zoom:1.02,fx:.52,fy:.50}, to:{zoom:1.14,fx:.42,fy:.54},
   html:cap('EXTÉRIEUR','Vue en perspective',null,'Fondations dimensionnées pour l’extension R+1.') },
+
+{ id:'implantation', chip:'Implantation', img:'toit', dur:4000, bg:'#081538', vig:0.5, scrim:0.55,
+  from:{zoom:1.08,fx:.62,fy:.50}, to:{zoom:1.0,fx:.60,fy:.50},
+  html:cap('LE TERRAIN','La villa sur sa parcelle',null,'Terrain de 150 m² minimum, place de stationnement en façade.') },
 
 { id:'plan', chip:'Le plan', img:'plan', dur:4500, bg:'#ffffff', vig:0, scrim:0,
   from:{span:1.06,fx:.5,fy:.5,dx:0.14}, to:P.plan,
@@ -310,12 +314,12 @@ const scenes = [
       </div>
     </div>` },
 
-{ id:'programme', chip:'Le programme', img:'aerien', dur:4200, bg:'#081538', vig:1, scrim:1,
-  from:{zoom:1.14,fx:.5,fy:.5,dx:0.10}, to:{zoom:1.02,fx:.52,fy:.46,dx:0.12,dy:-0.03},
+{ id:'programme', chip:'Le programme', img:'rue', dur:4200, bg:'#081538', vig:1, scrim:1,
+  from:{zoom:1.12,fx:.46,fy:.50}, to:{zoom:1.0,fx:.44,fy:.48},
   html:cap('LE PROGRAMME','As Salam Sa Keur',null,'Accessibilité, confort et tranquillité, impact durable, évolution : la villa ZAHRA est conçue pour grandir avec la famille.') },
 
-{ id:'conditions', chip:'Conditions', img:'cour', dur:6000, bg:'#081538', vig:1, scrim:1,
-  from:{zoom:1.08,fx:.5,fy:.5}, to:{zoom:1.0,fx:.48,fy:.5},
+{ id:'conditions', chip:'Conditions', img:'rue', dur:6000, bg:'#081538', vig:1, scrim:1,
+  from:{zoom:1.0,fx:.44,fy:.48}, to:{zoom:1.07,fx:.40,fy:.50},
   html:`<div class="panel">
       <div class="eyebrow">CONDITIONS D’ACQUISITION</div>
       <div class="big"><small>À PARTIR DE</small>17 000 000 FCFA</div>
@@ -329,8 +333,8 @@ const scenes = [
       <p class="lede" style="margin:0">Délai de livraison compté après validation du terrain.</p>
     </div>` },
 
-{ id:'contact', chip:'Contact', img:'cour', dur:5500, bg:'#081538', vig:1, scrim:1,
-  from:{zoom:1.0,fx:.48,fy:.5}, to:{zoom:1.06,fx:.5,fy:.48},
+{ id:'contact', chip:'Contact', img:'rue', dur:5500, bg:'#081538', vig:1, scrim:1,
+  from:{zoom:1.07,fx:.40,fy:.50}, to:{zoom:1.13,fx:.44,fy:.48},
   html:`<div class="panel center">
       <div class="eyebrow">KATOS CONSTRUCTION</div>
       <h2>Parlons de votre villa</h2>
