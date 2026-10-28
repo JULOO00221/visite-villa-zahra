@@ -1,507 +1,591 @@
+<!doctype html>
+<html lang="fr">
+<head>
 <meta charset="utf-8">
-<title>Visite de la Villa ZAHRA</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Villa ZAHRA</title>
+<meta property="og:title" content="Villa ZAHRA · Visite virtuelle">
+<meta property="og:image" content="/media/hero.jpg">
+<link rel="icon" href="/media/logo.png">
+<meta name="description" content="Visite virtuelle de la villa F3 ZAHRA, programme As Salam Sa Keur, KATOS Construction.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,900&display=swap" rel="stylesheet">
 <style>
-/* Visite guidée Villa ZAHRA (F3) — plateau 16:9 cinéma sur fond bleu nuit KATOS,
-   caméra pilotée en JS au-dessus de la vue en plan 3D, habillage en unités cqw
-   pour que la composition reste identique à toutes les tailles d'écran. */
+/* Mise en page : un « plateau » de visite cinéma en tête, puis la fiche de la villa
+   déroulée comme un dossier de vente KATOS (pièces → surfaces → atouts → conditions → contact).
+   Identité KATOS conservée : bleu nuit, accent orange, Montserrat. Un seul univers sombre, assumé. */
 :root{
-  --navy:#0e1f5b;      /* bleu KATOS */
-  --ink:#081538;       /* fond plateau */
-  --ink-2:#050e26;     /* fond page */
-  --orange:#f26c0d;    /* accent */
-  --orange-d:#c4520a;  /* accent sur blanc */
-  --paper:#ffffff;     /* fond des scènes de plan */
-  --mist:#c3cbe6;      /* texte secondaire sur navy */
-  --line:rgba(195,203,230,.22);
-  color-scheme: dark;
+  --ink:#050e26;        /* fond page */
+  --navy:#0e1f5b;       /* bleu KATOS */
+  --panel:#0b1946;      /* surfaces */
+  --orange:#f26c0d;     /* accent */
+  --orange-soft:#ffa24d;/* chiffres */
+  --peach:#ffb87a;      /* surtitres */
+  --taupe:#8c7068;      /* enduit de la façade */
+  --fg:#ffffff;
+  --mist:#c3cbe6;
+  --dim:#8f9bc0;
+  --line:rgba(195,203,230,.18);
+  --font:'Montserrat','Helvetica Neue',Arial,sans-serif;
+  color-scheme:dark;
 }
 *{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;background:var(--ink-2);color:#fff;
-  font-family:'Montserrat','Helvetica Neue',Arial,sans-serif;
-  padding-left:max(16px,env(safe-area-inset-left,0px));
-  padding-right:max(16px,env(safe-area-inset-right,0px));
-  padding-block:clamp(14px,2.4vh,30px);
-  display:flex;flex-direction:column;align-items:center;gap:14px;
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:calc(72px + env(safe-area-inset-top,0px))}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--fg);font-family:var(--font);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img,video{max-width:100%;display:block}
+a{color:inherit}
+button{font-family:inherit}
+:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.26em;text-transform:uppercase;color:var(--peach)}
+h2.sec{margin:8px 0 0;font-size:clamp(28px,4vw,44px);font-weight:900;line-height:1.05;letter-spacing:-.01em;text-wrap:balance}
+.lede{margin:14px 0 0;color:var(--mist);max-width:62ch;font-weight:500}
+section{padding-block:clamp(56px,8vw,96px)}
+.num{font-variant-numeric:tabular-nums}
+
+/* ---------- en-tête ---------- */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--ink)}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(5,14,38,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;gap:20px;height:64px}
+.brand{display:flex;align-items:center;background:#fff;border-radius:7px;padding:6px 11px;flex:none}
+.brand img{height:26px;width:auto}
+nav.menu{margin-left:auto;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+nav.menu::-webkit-scrollbar{display:none}
+nav.menu a{text-decoration:none;font-size:13px;font-weight:700;letter-spacing:.06em;color:var(--mist);padding:8px 12px;border-radius:6px;white-space:nowrap}
+nav.menu a:hover{color:#fff;background:rgba(195,203,230,.1)}
+nav.menu a.cta{background:var(--orange);color:#fff}
+nav.menu a.cta:hover{background:#ff7d1f}
+@media (max-width:820px){nav.menu a:not(.cta){display:none}}
+
+/* ---------- ouverture ---------- */
+.hero{position:relative;overflow:hidden;min-height:clamp(480px,74vh,760px);display:flex;align-items:flex-end}
+.hero .ph{position:absolute;inset:0;background:url(media/hero.jpg) 62% 50%/cover no-repeat;transform-origin:60% 55%;animation:drift 22s ease-out both}
+@keyframes drift{from{transform:scale(1.1)}to{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.hero .ph{animation:none}}
+.hero::after{content:"";position:absolute;inset:0;background:
+  linear-gradient(0deg,rgba(5,14,38,1) 0%,rgba(5,14,38,.55) 30%,rgba(5,14,38,0) 62%),
+  linear-gradient(90deg,rgba(5,14,38,.9) 0%,rgba(5,14,38,.5) 42%,rgba(5,14,38,0) 75%)}
+.hero .wrap{position:relative;z-index:1;width:100%;padding-block:0 clamp(36px,6vw,64px)}
+.kicker{font-size:13px;font-weight:800;letter-spacing:.34em;color:var(--peach)}
+.hero .l1{margin-top:14px;font-size:clamp(20px,2.4vw,30px);font-weight:500;letter-spacing:.06em;line-height:1}
+.hero h1{margin:2px 0 0;font-size:clamp(72px,13vw,168px);font-weight:900;font-style:italic;line-height:.88;letter-spacing:-.035em}
+.hero .rule{width:84px;height:6px;border-radius:3px;background:var(--orange);margin:22px 0 18px}
+.hero p{margin:0;max-width:46ch;font-size:clamp(16px,1.5vw,19px);font-weight:600;color:#e7ebf7}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.btn{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(195,203,230,.32);background:rgba(195,203,230,.12);color:#fff;
+  font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;padding:13px 20px;border-radius:8px;cursor:pointer}
+.btn:hover{background:rgba(195,203,230,.22)}
+.btn.primary{background:var(--orange);border-color:var(--orange)}
+.btn.primary:hover{background:#ff7d1f}
+.btn svg{width:16px;height:16px;fill:currentColor}
+
+.facts{border-block:1px solid var(--line);background:var(--navy)}
+.facts .wrap{display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}
+.fact{padding:22px 18px;border-left:1px solid var(--line);min-width:0}
+.fact:first-child{border-left:0;padding-left:0}
+.fact .v{font-size:clamp(22px,2.4vw,30px);font-weight:900;line-height:1.05;color:var(--orange-soft)}
+.fact .k{margin-top:6px;font-size:12.5px;font-weight:700;letter-spacing:.06em;color:var(--mist)}
+@media (max-width:900px){.facts .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fact{border-left:0;padding-left:0;border-top:1px solid var(--line)}
+  .fact:nth-child(-n+2){border-top:0}.fact:last-child{grid-column:1/-1}}
+
+/* ---------- visite ---------- */
+#visite{padding-top:clamp(48px,7vw,80px)}
+.tour{margin-top:30px;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:18px;align-items:start}
+@media (max-width:980px){.tour{grid-template-columns:minmax(0,1fr)}}
+.player{min-width:0}
+.screen{position:relative;width:100%;max-width:100%;aspect-ratio:16/9;background:#000;border-radius:10px;overflow:hidden;box-shadow:0 18px 60px rgba(0,0,0,.55)}
+.screen video{width:100%;height:100%;object-fit:cover}
+.screen:fullscreen{border-radius:0;aspect-ratio:auto;width:100vw;height:100vh}
+.screen:fullscreen video{object-fit:contain}
+.scrim{position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,rgba(5,14,38,.62) 0%,rgba(5,14,38,0) 42%)}
+.cap{position:absolute;left:clamp(12px,2.6%,28px);bottom:clamp(16px,4%,36px);max-width:min(64%,420px);
+  background:rgba(14,31,91,.93);border-left:5px solid var(--orange);border-radius:6px;padding:14px 18px 15px;
+  box-shadow:0 10px 30px rgba(5,14,38,.4);transition:opacity .45s,transform .45s}
+.cap.out{opacity:0;transform:translateY(10px)}
+.cap .eyebrow{font-size:10.5px}
+.cap h3{margin:5px 0 0;font-size:clamp(18px,2.4vw,28px);font-weight:900;line-height:1.05}
+.cap .m2{margin-top:6px;font-size:clamp(20px,2.6vw,32px);font-weight:900;color:var(--orange-soft);line-height:1}
+.cap p{margin:7px 0 0;font-size:clamp(12px,1.1vw,14px);font-weight:500;color:var(--mist);line-height:1.45}
+@media (max-width:560px){.cap p{display:none}.cap{padding:10px 13px}}
+.counter{position:absolute;right:16px;top:14px;display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.18em;text-shadow:0 1px 6px rgba(5,14,38,.7)}
+.counter i{width:7px;height:7px;border-radius:50%;background:var(--orange)}
+.start{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  background:rgba(5,14,38,.45) url(media/facade.jpg) center/cover;background-blend-mode:multiply;border:0;color:#fff;cursor:pointer;width:100%}
+.start .disc{width:84px;height:84px;border-radius:50%;background:var(--orange);display:grid;place-items:center;box-shadow:0 0 0 10px rgba(242,108,13,.25)}
+.start .disc svg{width:30px;height:30px;fill:#fff;margin-left:5px}
+.start b{font-size:clamp(15px,1.6vw,19px);font-weight:900;letter-spacing:.14em;text-transform:uppercase}
+.start span{font-size:13px;font-weight:600;color:var(--mist)}
+
+.bar{display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap}
+.ib{width:42px;height:42px;display:grid;place-items:center;border-radius:8px;border:1px solid rgba(195,203,230,.28);background:rgba(195,203,230,.12);color:#fff;cursor:pointer;flex:none}
+.ib:hover{background:rgba(195,203,230,.24)}
+.ib.primary{background:var(--orange);border-color:var(--orange)}
+.ib svg{width:18px;height:18px;fill:currentColor}
+.track{position:relative;flex:1 1 200px;min-width:0;height:42px;cursor:pointer;touch-action:none}
+.track .rail{position:absolute;left:0;right:0;top:50%;height:5px;margin-top:-2.5px;border-radius:3px;background:rgba(195,203,230,.2);overflow:hidden}
+.track .fill{position:absolute;inset:0 auto 0 0;width:0;background:var(--orange)}
+.track .tick{position:absolute;top:50%;width:2px;height:11px;margin-top:-5.5px;background:var(--ink);border-radius:1px}
+.time{font-size:12.5px;font-weight:700;color:var(--mist);min-width:92px;text-align:right}
+
+.stops{list-style:none;margin:0;padding:6px;background:var(--panel);border:1px solid var(--line);border-radius:10px;
+  max-height:min(70vh,560px);overflow-y:auto;display:flex;flex-direction:column;gap:2px}
+.stops li{display:block}
+.stop{width:100%;display:grid;grid-template-columns:28px 64px minmax(0,1fr);gap:10px;align-items:center;text-align:left;
+  padding:7px 8px;border-radius:7px;border:0;background:transparent;color:#fff;cursor:pointer}
+.stop:hover{background:rgba(195,203,230,.08)}
+.stop .n{font-size:11px;font-weight:800;color:var(--dim);letter-spacing:.06em}
+.stop img{width:64px;height:40px;object-fit:cover;border-radius:4px;opacity:.85}
+.stop .t{font-size:14px;font-weight:800;line-height:1.2}
+.stop .z{display:block;font-size:11.5px;font-weight:600;color:var(--dim);margin-top:2px}
+.stop[aria-current="true"]{background:rgba(242,108,13,.16)}
+.stop[aria-current="true"] .n{color:var(--orange)}
+.stop[aria-current="true"] img{opacity:1;outline:2px solid var(--orange);outline-offset:1px}
+@media (max-width:980px){
+  .stops{flex-direction:row;overflow-x:auto;overflow-y:hidden;max-height:none;scroll-snap-type:x proximity}
+  .stops li{flex:none;scroll-snap-align:start}
+  .stop{grid-template-columns:1fr;width:132px;gap:6px}
+  .stop .n{display:none}.stop img{width:100%;height:72px}
 }
-.wrap{width:100%;max-width:1360px;display:flex;flex-direction:column;gap:14px}
+.hint{margin:12px 0 0;font-size:12.5px;color:var(--dim)}
 
-/* ---------- plateau ---------- */
-.stage{
-  position:relative;width:100%;max-width:100%;aspect-ratio:16/9;
-  container-type:size;overflow:hidden;border-radius:10px;
-  background:var(--ink);box-shadow:0 18px 60px rgba(0,0,0,.55);
-}
-.inner{position:absolute;inset:0;--u:0.625vw;overflow:hidden}
-@supports (width:1cqw){ .inner{--u:1cqw} }
+/* ---------- pièces ---------- */
+.rooms{margin-top:34px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media (max-width:900px){.rooms{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.rooms{grid-template-columns:minmax(0,1fr)}}
+.room{position:relative;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;
+  text-align:left;color:#fff;padding:0;cursor:pointer}
+.room .im{position:relative;aspect-ratio:16/10;overflow:hidden}
+.room .im img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.room:hover .im img{transform:scale(1.05)}
+.room .play{position:absolute;right:12px;bottom:12px;display:flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.12em;
+  background:rgba(5,14,38,.78);padding:6px 10px;border-radius:999px}
+.room .play svg{width:10px;height:10px;fill:var(--orange)}
+.room .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:4px;flex:1}
+.room .row1{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.room h3{margin:0;font-size:19px;font-weight:900}
+.room .m2{font-size:19px;font-weight:900;color:var(--orange-soft);white-space:nowrap}
+.room p{margin:2px 0 0;font-size:14px;color:var(--mist);font-weight:500}
 
-.bg{position:absolute;inset:0;background:var(--ink)}
-.layer{
-  position:absolute;left:50%;top:50%;max-width:none;display:block;
-  transform-origin:50% 50%;backface-visibility:hidden;
-  will-change:transform,opacity;
-}
-.vig{position:absolute;inset:0;pointer-events:none;z-index:3;
-  background:radial-gradient(130% 95% at 50% 45%,rgba(0,0,0,0) 38%,rgba(5,14,38,.72) 100%)}
-.scrim{position:absolute;inset:0;pointer-events:none;z-index:4;
-  background:linear-gradient(0deg,rgba(8,21,56,.52) 0%,rgba(8,21,56,.18) 34%,rgba(8,21,56,0) 60%),
-             linear-gradient(90deg,rgba(8,21,56,.84) 0%,rgba(8,21,56,.54) 40%,rgba(8,21,56,.10) 76%,rgba(8,21,56,0) 100%)}
+/* ---------- surfaces ---------- */
+.surf{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:clamp(28px,5vw,64px);align-items:center}
+@media (max-width:860px){.surf{grid-template-columns:minmax(0,1fr)}}
+.table{background:var(--navy);border-radius:10px;padding:clamp(18px,3vw,30px)}
+.trow{display:grid;grid-template-columns:minmax(0,9rem) minmax(0,1fr) 6.2rem;gap:14px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}
+.trow .k{font-size:14.5px;font-weight:700;color:#e7ebf7}
+.trow .b{height:10px;border-radius:5px;background:rgba(195,203,230,.14);overflow:hidden}
+.trow .b i{display:block;height:100%;background:var(--orange);border-radius:5px}
+.trow .v{font-size:15px;font-weight:900;text-align:right}
+.trow.total{border-bottom:0;border-top:3px solid var(--orange);margin-top:10px;padding-top:16px}
+.trow.total .k{font-weight:800;letter-spacing:.08em;font-size:13px}
+.trow.total .v{font-size:24px;color:var(--orange-soft);grid-column:2/4}
+@media (max-width:480px){.trow{grid-template-columns:minmax(0,1fr) 5.6rem}.trow .b{display:none}.trow.total .v{grid-column:2}}
+.note{margin:14px 0 0;font-size:12.5px;color:var(--dim)}
+.plan{margin:0;background:#fff;border-radius:10px;padding:clamp(10px,2vw,20px);max-width:560px;justify-self:center;width:100%}
+.plan img{width:100%;height:auto}
+.plan figcaption{margin-top:10px;font-size:13px;font-weight:600;color:var(--navy)}
+.plan figcaption a{color:#c4520a;font-weight:800}
+.surf{align-items:start}
 
-/* ---------- habillage ---------- */
-.brand{
-  position:absolute;left:calc(var(--u)*2.6);top:calc(var(--u)*2.6);z-index:6;
-  background:#fff;border:1px solid rgba(14,31,91,.12);
-  border-radius:calc(var(--u)*0.7);padding:calc(var(--u)*0.75) calc(var(--u)*1.2);
-  box-shadow:0 calc(var(--u)*0.3) calc(var(--u)*1.2) rgba(0,0,0,.18);
-}
-.brand img{display:block;height:calc(var(--u)*2.6);width:auto;max-width:none}
+/* ---------- atouts ---------- */
+.feats{margin-top:34px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--line)}
+@media (max-width:860px){.feats{grid-template-columns:minmax(0,1fr)}}
+.feat{padding:24px 24px 26px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:40px minmax(0,1fr);gap:14px}
+.feat svg{width:30px;height:30px;stroke:var(--orange);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.feat h3{margin:0;font-size:17px;font-weight:800}
+.feat p{margin:6px 0 0;font-size:14.5px;color:var(--mist);font-weight:500}
 
-.counter{
-  position:absolute;right:calc(var(--u)*2.6);top:calc(var(--u)*2.9);z-index:6;
-  display:flex;align-items:center;gap:calc(var(--u)*0.9);
-  font-size:calc(var(--u)*0.95);font-weight:800;letter-spacing:.18em;
-  color:#fff;text-shadow:0 1px 6px rgba(5,14,38,.6);
-}
-.counter .dot{width:calc(var(--u)*0.5);height:calc(var(--u)*0.5);border-radius:50%;background:var(--orange)}
-.counter.on-paper{color:var(--navy);text-shadow:none}
+/* ---------- conditions & contact ---------- */
+.band{background:var(--navy);border-block:1px solid var(--line)}
+.cond{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:start}
+@media (max-width:860px){.cond{grid-template-columns:minmax(0,1fr)}}
+.price small{display:block;font-size:13px;font-weight:800;letter-spacing:.24em;color:var(--mist)}
+.price .big{margin-top:10px;font-size:clamp(40px,6.4vw,74px);font-weight:900;line-height:.95;color:var(--orange-soft);letter-spacing:-.02em}
+.price .big span{display:block;font-size:.42em;letter-spacing:.04em;color:#fff;margin-top:6px}
+.price i{display:inline-block;margin-top:14px;font-style:normal;font-size:12.5px;font-weight:800;letter-spacing:.2em;color:var(--mist);border:1px solid var(--line);padding:6px 10px;border-radius:999px}
+.rows{display:flex;flex-direction:column}
+.r{display:flex;align-items:baseline;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.r .k{flex:1;font-size:15px;font-weight:600;color:#e7ebf7}
+.r .v{font-size:17px;font-weight:900;text-align:right}
 
-.progress{position:absolute;left:0;right:0;bottom:0;height:calc(var(--u)*0.32);
-  background:rgba(195,203,230,.22);z-index:7}
-.progress i{display:block;height:100%;width:0;background:var(--orange)}
-
-/* ---------- cartouches ---------- */
-.ov{position:absolute;inset:0;z-index:5;pointer-events:none}
-.cap{
-  position:absolute;left:calc(var(--u)*3.4);bottom:calc(var(--u)*3.6);
-  max-width:calc(var(--u)*34);
-  background:rgba(14,31,91,.93);border-left:calc(var(--u)*0.45) solid var(--orange);
-  border-radius:calc(var(--u)*0.55);
-  padding:calc(var(--u)*1.5) calc(var(--u)*2) calc(var(--u)*1.6);
-  box-shadow:0 calc(var(--u)*1) calc(var(--u)*2.6) rgba(5,14,38,.4);
-  opacity:0; /* l'apparition est pilotée par la timeline, pas par une animation CSS */
-}
-.cap .eyebrow{font-size:calc(var(--u)*0.85);font-weight:800;letter-spacing:.26em;color:#ffb87a}
-.cap h2{margin:calc(var(--u)*0.55) 0 0;font-size:calc(var(--u)*2.5);font-weight:900;
-  line-height:1.05;letter-spacing:-.01em;text-wrap:balance}
-.cap .m2{margin-top:calc(var(--u)*0.7);font-size:calc(var(--u)*2.9);font-weight:900;
-  color:#ffa24d;font-variant-numeric:tabular-nums;line-height:1}
-.cap p{margin:calc(var(--u)*0.7) 0 0;font-size:calc(var(--u)*1.05);font-weight:500;
-  line-height:1.45;color:var(--mist)}
-
-/* titre d'ouverture */
-.hero{position:absolute;left:calc(var(--u)*5);bottom:calc(var(--u)*5.5);max-width:calc(var(--u)*58);
-  opacity:0}
-.hero .kicker{font-size:calc(var(--u)*1.05);font-weight:800;letter-spacing:.34em;color:#ffb87a}
-.hero .l1{margin-top:calc(var(--u)*1.1);font-size:calc(var(--u)*2.6);font-weight:500;line-height:1;letter-spacing:.02em}
-.hero .l2{font-size:calc(var(--u)*7.6);font-weight:900;font-style:italic;line-height:.92;letter-spacing:-.03em}
-.hero .rule{width:calc(var(--u)*7);height:calc(var(--u)*0.5);background:var(--orange);
-  border-radius:calc(var(--u)*0.25);margin:calc(var(--u)*1.3) 0 calc(var(--u)*1.2)}
-.hero p{margin:0;font-size:calc(var(--u)*1.3);font-weight:600;line-height:1.5;color:#e7ebf7;max-width:calc(var(--u)*40)}
-
-/* panneau latéral (récap, conditions, contact) */
-.panel{
-  position:absolute;top:calc(var(--u)*9);bottom:calc(var(--u)*5);right:calc(var(--u)*3.6);
-  width:calc(var(--u)*41);background:rgba(14,31,91,.96);
-  border-radius:calc(var(--u)*0.8);padding:calc(var(--u)*2.4) calc(var(--u)*2.6);
-  box-shadow:0 calc(var(--u)*1.2) calc(var(--u)*3) rgba(5,14,38,.45);
-  display:flex;flex-direction:column;opacity:0;
-}
-.panel.wide{left:calc(var(--u)*18);width:auto}
-.panel.center{left:50%;right:auto;transform:translateX(-50%);width:calc(var(--u)*62);
-  top:calc(var(--u)*11);bottom:calc(var(--u)*7);align-items:center;text-align:center}
-.panel .eyebrow{font-size:calc(var(--u)*0.85);font-weight:800;letter-spacing:.26em;color:#ffb87a}
-.panel h2{margin:calc(var(--u)*0.6) 0 calc(var(--u)*1.4);font-size:calc(var(--u)*2.4);
-  font-weight:900;line-height:1.05}
-.rows{display:flex;flex-direction:column;flex-grow:1;justify-content:center}
-.row{display:flex;align-items:baseline;gap:calc(var(--u)*1);
-  padding:calc(var(--u)*0.62) 0;border-bottom:1px solid var(--line)}
-.row:last-child{border-bottom:0}
-.row .k{flex-grow:1;font-size:calc(var(--u)*1.15);font-weight:600;color:#e7ebf7}
-.row .v{font-size:calc(var(--u)*1.3);font-weight:900;font-variant-numeric:tabular-nums}
-.row.total{margin-top:calc(var(--u)*0.8);border-top:calc(var(--u)*0.2) solid var(--orange);border-bottom:0;
-  padding-top:calc(var(--u)*1)}
-.row.total .k{font-size:calc(var(--u)*1.2);font-weight:800;letter-spacing:.06em}
-.row.total .v{font-size:calc(var(--u)*2.1);color:#ffa24d}
-.big{font-size:calc(var(--u)*4.4);font-weight:900;line-height:1;color:#ffa24d;
-  font-variant-numeric:tabular-nums;white-space:nowrap}
-.big small{display:block;font-size:calc(var(--u)*1.05);font-weight:700;letter-spacing:.2em;
-  color:var(--mist);margin-bottom:calc(var(--u)*0.6)}
-.big i{display:block;font-style:normal;font-size:calc(var(--u)*1.1);font-weight:800;
-  letter-spacing:.2em;color:var(--mist);margin-top:calc(var(--u)*0.5)}
-.pill{display:inline-flex;align-items:center;gap:calc(var(--u)*0.8);
-  background:var(--orange-d);border-radius:calc(var(--u)*2.5);
-  padding:calc(var(--u)*0.85) calc(var(--u)*1.8);font-size:calc(var(--u)*1.15);font-weight:700;
-  margin-top:calc(var(--u)*1.6)}
-.panel .lede{margin:0 0 calc(var(--u)*1.6);font-size:calc(var(--u)*1.15);font-weight:500;
-  line-height:1.5;color:var(--mist)}
-.contactline{font-size:calc(var(--u)*1.5);font-weight:800;line-height:1.7;
-  font-variant-numeric:tabular-nums}
-.contactline span{color:var(--mist);font-weight:600}
-
-.panel.center{transform:translateX(-50%)}
-
-/* ---------- contrôles ---------- */
-.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
-button{
-  font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.08em;
-  color:#fff;background:rgba(195,203,230,.14);border:1px solid rgba(195,203,230,.28);
-  border-radius:8px;padding:9px 15px;cursor:pointer;transition:background-color .15s,border-color .15s;
-}
-button:hover{background:rgba(195,203,230,.24)}
-button:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
-button.primary{background:var(--orange);border-color:var(--orange);color:#fff;min-width:124px}
-button.primary:hover{background:#ff7d1f}
-.bar .sp{flex-grow:1}
-.hint{margin:0;font-size:12.5px;line-height:1.6;color:#9aa6c8;max-width:70ch}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{font-size:11.5px;font-weight:600;letter-spacing:.04em;padding:6px 10px;border-radius:999px;
-  background:rgba(195,203,230,.1);border:1px solid rgba(195,203,230,.2);color:#cfd6ea;cursor:pointer}
-.chip[aria-current="true"]{background:var(--orange);border-color:var(--orange);color:#fff}
-
-.stage.clean .counter,.stage.clean .progress{opacity:0;transition:opacity .3s}
-body.clean .chips,body.clean .hint{display:none}
-.stage:fullscreen{width:100vw;height:100vh;max-width:none;aspect-ratio:auto;border-radius:0}
-
-@media (prefers-reduced-motion:reduce){
-  .bg,.vig,.scrim{transition:none}
-}
-@media (max-width:620px){
-  .bar{gap:8px}button{padding:8px 12px;font-size:12px}
-  button.primary{min-width:100px}
-}
+.contact{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:center}
+@media (max-width:860px){.contact{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 22px}
+.cline{display:flex;align-items:center;gap:12px;padding:16px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.cline:last-child{border-bottom:0}
+.cline .lbl{width:100%;font-size:11px;font-weight:800;letter-spacing:.22em;color:var(--dim)}
+.cline .val{flex:1;min-width:0;font-size:clamp(17px,2vw,21px);font-weight:800;overflow-wrap:anywhere;user-select:all}
+.copy{flex:none;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(195,203,230,.12);
+  border:1px solid rgba(195,203,230,.28);border-radius:6px;padding:7px 11px;cursor:pointer}
+.copy:hover{background:rgba(195,203,230,.22)}
+.copy.ok{background:var(--orange);border-color:var(--orange)}
+footer{padding-block:28px 40px;border-top:1px solid var(--line);color:var(--dim);font-size:13px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
 </style>
+</head>
+<body>
 
-<div class="wrap">
-  <div class="stage" id="stage">
-    <div class="inner">
-      <div class="bg" id="bg"></div>
-      <img class="layer" id="la" alt="">
-      <img class="layer" id="lb" alt="">
-      <div class="vig" id="vig"></div>
-      <div class="scrim" id="scrim"></div>
-      <div class="ov" id="ov"></div>
-      <div class="brand"><img id="logo" alt="KATOS Construction"></div>
-      <div class="counter" id="counter"><span class="dot"></span><span id="ctext">01 / 17</span></div>
-      <div class="progress"><i id="bar"></i></div>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="KATOS Construction, retour en haut"><img src="media/logo.png" alt="KATOS Construction"></a>
+    <nav class="menu" aria-label="Sections">
+      <a href="#pieces">Pièces</a>
+      <a href="#surfaces">Surfaces</a>
+      <a href="#atouts">Atouts</a>
+      <a href="#conditions">Conditions</a>
+      <a href="#contact">Contact</a>
+      <a class="cta" href="#visite">Visite</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="ph" role="img" aria-label="Façade de la villa ZAHRA au crépuscule"></div>
+    <div class="wrap">
+      <div class="kicker">AS SALAM SA KEUR · VILLA F3</div>
+      <div class="l1">VILLA</div>
+      <h1>ZAHRA</h1>
+      <div class="rule"></div>
+      <p>Une villa F3 de plain-pied, livrée avec des fondations prêtes pour une extension R+1.</p>
+      <div class="actions">
+        <a class="btn primary" href="#visite" id="heroPlay"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg>Lancer la visite</a>
+        <a class="btn" href="#conditions">À partir de 17 000 000 FCFA HT</a>
+      </div>
     </div>
   </div>
 
-  <div class="bar">
-    <button class="primary" id="play" aria-live="off">PAUSE</button>
-    <button id="prev" title="Scène précédente">‹ PRÉCÉDENT</button>
-    <button id="next" title="Scène suivante">SUIVANT ›</button>
-    <button id="restart">REPRENDRE AU DÉBUT</button>
-    <span class="sp"></span>
-    <button id="fs">PLEIN ÉCRAN</button>
-    <button id="ui">MASQUER L’INTERFACE</button>
+  <div class="facts">
+    <div class="wrap">
+      <div class="fact"><div class="v num">76,99 m²</div><div class="k">Surface des pièces</div></div>
+      <div class="fact"><div class="v">2 chambres</div><div class="k">Plus séjour et salon séparés</div></div>
+      <div class="fact"><div class="v">Plain-pied</div><div class="k">Fondations prêtes R+1</div></div>
+      <div class="fact"><div class="v num">150 m²</div><div class="k">Terrain minimum</div></div>
+      <div class="fact"><div class="v num">18 mois</div><div class="k">Délai de livraison</div></div>
+    </div>
   </div>
 
-  <div class="chips" id="chips"></div>
+  <!-- ================= VISITE ================= -->
+  <section id="visite">
+    <div class="wrap">
+      <div class="eyebrow">Visite virtuelle</div>
+      <h2 class="sec">Entrez dans la villa, pièce par pièce</h2>
+      <p class="lede">Un parcours continu de 3 minutes et demie, de la rue jusqu’à la cour arrière. Choisissez une étape dans la liste pour y aller directement.</p>
 
-  <p class="hint">Visite guidée de la villa F3 « ZAHRA » — programme <strong>As Salam Sa&nbsp;Keur</strong>, KATOS Construction. La caméra parcourt la vue en plan 3D pièce par pièce : les surfaces affichées sont celles du plan du rez-de-chaussée. Pour obtenir un fichier vidéo, passez en plein écran, reprenez au début et enregistrez votre écran. Durée de la visite : environ 1&nbsp;min&nbsp;15&nbsp;s.</p>
-</div>
+      <div class="tour">
+        <div class="player">
+          <div class="screen" id="screen">
+            <video id="vid" playsinline muted preload="metadata" poster="media/facade.jpg"></video>
+            <div class="scrim"></div>
+            <div class="counter" aria-live="polite"><i></i><span id="ctr" class="num">01 / 12</span></div>
+            <div class="cap out" id="cap"></div>
+            <button class="start" id="start" type="button" aria-label="Démarrer la visite virtuelle">
+              <span class="disc"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></span>
+              <b>Démarrer la visite</b>
+              <span>12 étapes · environ 3 min 30</span>
+            </button>
+          </div>
+          <div class="bar">
+            <button class="ib primary" id="play" type="button" aria-label="Lecture"><svg viewBox="0 0 24 24" id="playIco"><path d="M7 4.5v15l13-7.5z"/></svg></button>
+            <button class="ib" id="prev" type="button" aria-label="Étape précédente"><svg viewBox="0 0 24 24"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
+            <button class="ib" id="next" type="button" aria-label="Étape suivante"><svg viewBox="0 0 24 24"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button>
+            <div class="track" id="track" role="slider" tabindex="0" aria-label="Progression de la visite" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <div class="rail"><div class="fill" id="fill"></div></div>
+            </div>
+            <span class="time num" id="time">0:00 / 3:29</span>
+            <button class="ib" id="fs" type="button" aria-label="Plein écran"><svg viewBox="0 0 24 24"><path d="M4 4h6v2H6v4H4zm10 0h6v6h-2V6h-4zM4 14h2v4h4v2H4zm14 4v-4h2v6h-6v-2z"/></svg></button>
+          </div>
+          <p class="hint">Raccourcis : espace pour lecture/pause, flèches gauche et droite pour changer d’étape.</p>
+        </div>
+        <ol class="stops" id="stops" aria-label="Étapes de la visite"></ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PIÈCES ================= -->
+  <section id="pieces" style="padding-top:0">
+    <div class="wrap">
+      <div class="eyebrow">Les pièces</div>
+      <h2 class="sec">Ce que vous trouverez à l’intérieur</h2>
+      <p class="lede">Surfaces relevées sur le plan du rez-de-chaussée. Touchez une pièce pour la voir dans la visite.</p>
+      <div class="rooms" id="rooms"></div>
+    </div>
+  </section>
+
+  <!-- ================= SURFACES ================= -->
+  <section id="surfaces" class="band">
+    <div class="wrap surf">
+      <div>
+        <div class="eyebrow">Le plan et les surfaces</div>
+        <h2 class="sec">Les surfaces du rez-de-chaussée</h2>
+        <p class="lede">Près de la moitié de la surface est consacrée aux pièces de vie : le séjour et le salon totalisent 39,37 m², pour vivre en famille et recevoir sans traverser la maison.</p>
+        <div class="table" id="table" style="margin-top:26px"></div>
+        <p class="note">Le stationnement, la cour et le dégagement sont hors de ce total.</p>
+      </div>
+      <figure class="plan">
+        <img src="media/plan.jpg" alt="Vue en plan 3D du rez-de-chaussée de la villa ZAHRA" loading="lazy" width="1100" height="1580">
+        <figcaption>Vue en plan 3D du rez-de-chaussée. <a href="plan-3d.html">Voir la visite animée du plan →</a></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ================= ATOUTS ================= -->
+  <section id="atouts">
+    <div class="wrap">
+      <div class="eyebrow">Le programme As Salam Sa Keur</div>
+      <h2 class="sec">Une villa conçue pour grandir avec la famille</h2>
+      <p class="lede">Accessibilité, confort et tranquillité, impact durable, évolution.</p>
+      <div class="feats">
+        <div class="feat"><svg viewBox="0 0 32 32"><path d="M4 27h24M7 27V14l9-7 9 7v13"/><path d="M7 9V5M25 9V5M7 5h18" stroke-dasharray="2 2.5"/></svg><div><h3>Prête pour un étage</h3><p>Fondations dimensionnées pour une extension R+1, sans reprendre le gros œuvre.</p></div></div>
+        <div class="feat"><svg viewBox="0 0 32 32"><rect x="4" y="7" width="24" height="18" rx="1"/><path d="M15 7v18M15 16h13"/></svg><div><h3>Séjour et salon séparés</h3><p>Deux pièces de vie distinctes : l’une pour la famille, l’autre pour recevoir.</p></div></div>
+        <div class="feat"><svg viewBox="0 0 32 32"><path d="M6 24V12h20v12M4 24h24M6 18h20M10 12V8h5v4"/></svg><div><h3>Deux chambres au calme</h3><p>Chambre 1 côté façade, chambre 2 côté cour avec sa salle de bain attenante.</p></div></div>
+        <div class="feat"><svg viewBox="0 0 32 32"><path d="M10 6h12v6a6 6 0 0 1-12 0zM16 18v8M11 26h10"/></svg><div><h3>Toilette visiteur</h3><p>Près de l’entrée, indépendante de la salle de bain de la famille.</p></div></div>
+        <div class="feat"><svg viewBox="0 0 32 32"><path d="M16 27V15M16 15c-5 0-8-3-8-8 5 0 8 3 8 8zM16 19c4 0 7-2.5 7-7-4 0-7 2.5-7 7zM6 27h20"/></svg><div><h3>Cour arrière arborée</h3><p>Un extérieur privé, directement accessible depuis la cuisine.</p></div></div>
+        <div class="feat"><svg viewBox="0 0 32 32"><path d="M5 20l3-7h16l3 7v5H5zM5 20h22"/><circle cx="10" cy="23" r="1.4"/><circle cx="22" cy="23" r="1.4"/><path d="M4 10l12-5 12 5"/></svg><div><h3>Stationnement en façade</h3><p>Une place sous auvent, hors surface habitable.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONDITIONS ================= -->
+  <section id="conditions" class="band">
+    <div class="wrap cond">
+      <div>
+        <div class="eyebrow">Conditions d’acquisition</div>
+        <div class="price" style="margin-top:22px">
+          <small>À PARTIR DE</small>
+          <div class="big num">17 000 000<span>FCFA</span></div>
+          <i>HORS TAXES</i>
+        </div>
+      </div>
+      <div>
+        <div class="rows">
+          <div class="r"><span class="k">Apport initial</span><span class="v num">3 500 000 FCFA</span></div>
+          <div class="r"><span class="k">Mensualité</span><span class="v num">225 000 FCFA HT</span></div>
+          <div class="r"><span class="k">Durée</span><span class="v num">60 mois</span></div>
+          <div class="r"><span class="k">Étude de conformité du terrain</span><span class="v num">2 mois</span></div>
+          <div class="r"><span class="k">Livraison</span><span class="v num">18 mois</span></div>
+        </div>
+        <p class="note">Montants hors taxes. Le délai de livraison court à partir de la validation du terrain.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact">
+    <div class="wrap contact">
+      <div>
+        <div class="eyebrow">KATOS Construction</div>
+        <h2 class="sec">Parlons de votre villa</h2>
+        <p class="lede">Étude technique, construction aux normes, suivi du chantier à distance via KATOS&nbsp;CONNECT.</p>
+        <div class="actions"><a class="btn" href="#visite">Revoir la visite</a></div>
+      </div>
+      <div class="card">
+        <div class="cline"><span class="lbl">SERVICE COMMERCIAL</span><span class="val num" id="tel">+221 77 032 69 90</span><button class="copy" type="button" data-copy="tel">Copier</button></div>
+        <div class="cline"><span class="lbl">E-MAIL</span><span class="val" id="mail">contact@katosconsulting.com</span><button class="copy" type="button" data-copy="mail">Copier</button></div>
+        <div class="cline"><span class="lbl">SITE WEB</span><a class="val" id="web" href="https://www.katosconsulting.com" target="_blank" rel="noopener">www.katosconsulting.com</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Villa ZAHRA · F3 · Programme As Salam Sa Keur</span>
+    <span>© KATOS Construction · Images de synthèse non contractuelles</span>
+  </div>
+</footer>
 
 <script>
-/* ================= sources ================= */
-const SRC = {
-  facade: "img/facade.jpg",
-  persp:  "img/persp.jpg",
-  plan:   "img/plan.jpg",
-  toit:   "img/toit.jpg",
-  rue:    "img/rue.jpg",
-  logo:   "img/logo.png"
-};
-const NAT = {
-  facade:[2000,1124], persp:[2000,1124], plan:[2960,4252],
-  toit:  [2000,1124], rue:  [2000,1124]
-};
-document.getElementById('logo').src = SRC.logo;
-
-/* ================= scènes =================
-   pose : {span} = fraction de la hauteur de l'image visible (plans)
-          {zoom} = facteur au-dessus du cadrage « cover » (photos)
-          fx,fy  = point visé en fraction de l'image
-          dx,dy  = décalage du point visé, en fraction du plateau          */
-/* cadrage d'une pièce : la pièce est posée à droite du centre, la place laissée
-   à gauche reçoit le cartouche. */
-const r = (fx,fy,wspan,dx=0.11,dy=-0.06)=>({wspan,fx,fy,dx,dy});
-const P = {
-  plan: {span:0.97, fx:.50, fy:.50, dx:0.14},
-  cour: {wspan:0.90,fx:.50, fy:.16, dx:0,  dy:0.05},
-  cuisine:r(.18,.30,0.52), sejour:r(.175,.52,0.52), salon:r(.71,.52,0.55),
-  ch2:    r(.575,.30,0.54), sdb:  r(.85,.34,0.34,0.13,-0.04),
-  ch1:    r(.49,.715,0.42,0.13,-0.05), toil: r(.255,.82,0.35,0.11,-0.05),
-  park:   r(.78,.76,0.664,0.20,-0.03),
-  surf:  {span:0.99, fx:.50, fy:.50, dx:-0.26}
-};
-
-const scenes = [
-{ id:'ouverture', chip:'Ouverture', img:'facade', dur:4000, bg:'#081538', vig:1, scrim:1,
-  from:{zoom:1.12,fx:.52,fy:.50}, to:{zoom:1.0,fx:.50,fy:.50},
-  html:`<div class="hero">
-      <div class="kicker">AS SALAM SA KEUR</div>
-      <div class="l1">VILLA</div>
-      <div class="l2">ZAHRA</div>
-      <div class="rule"></div>
-      <p>Une villa F3 de plain-pied, livrée avec des fondations prêtes pour une extension R+1.</p>
-    </div>` },
-
-{ id:'facade', chip:'Façade', img:'facade', dur:4200, bg:'#081538', vig:1, scrim:1,
-  from:{zoom:1.0,fx:.50,fy:.50}, to:{zoom:1.12,fx:.44,fy:.52},
-  html:cap('EXTÉRIEUR','Façade principale',null,'Entrée abritée, stationnement intégré sous auvent.') },
-
-{ id:'perspective', chip:'Perspective', img:'persp', dur:4000, bg:'#081538', vig:1, scrim:1,
-  from:{zoom:1.02,fx:.52,fy:.50}, to:{zoom:1.14,fx:.42,fy:.54},
-  html:cap('EXTÉRIEUR','Vue en perspective',null,'Fondations dimensionnées pour l’extension R+1.') },
-
-{ id:'implantation', chip:'Implantation', img:'toit', dur:4000, bg:'#081538', vig:0.5, scrim:0.55,
-  from:{zoom:1.08,fx:.62,fy:.50}, to:{zoom:1.0,fx:.60,fy:.50},
-  html:cap('LE TERRAIN','La villa sur sa parcelle',null,'Terrain de 150 m² minimum, place de stationnement en façade.') },
-
-{ id:'plan', chip:'Le plan', img:'plan', dur:4500, bg:'#ffffff', vig:0, scrim:0,
-  from:{span:1.06,fx:.5,fy:.5,dx:0.14}, to:P.plan,
-  html:cap('LE PLAN','Rez-de-chaussée',null,'Séjour et salon séparés, deux chambres, cuisine, salle de bain et toilette visiteur.') },
-
-{ id:'cour', chip:'Cour', img:'plan', dur:3600, bg:'#ffffff', vig:0, scrim:0,
-  from:P.plan, to:P.cour,
-  html:cap('EXTÉRIEUR','Cour arrière',null,'Espace extérieur arboré à l’arrière de la villa.') },
-
-{ id:'cuisine', chip:'Cuisine', img:'plan', dur:3800, bg:'#ffffff', vig:0, scrim:0,
-  from:P.cour, to:P.cuisine,
-  html:cap('PIÈCE','Cuisine','6,00 m²','Ouverte sur l’arrière, avec accès direct à la cour.') },
-
-{ id:'sejour', chip:'Séjour', img:'plan', dur:4000, bg:'#ffffff', vig:0, scrim:0,
-  from:P.cuisine, to:P.sejour,
-  html:cap('PIÈCE','Séjour','21,87 m²','La plus grande pièce de la villa, en prolongement de l’entrée.') },
-
-{ id:'salon', chip:'Salon', img:'plan', dur:3800, bg:'#ffffff', vig:0, scrim:0,
-  from:P.sejour, to:P.salon,
-  html:cap('PIÈCE','Salon','17,50 m²','Séparé du séjour, pour recevoir sans traverser la maison.') },
-
-{ id:'chambre2', chip:'Chambre 2', img:'plan', dur:3800, bg:'#ffffff', vig:0, scrim:0,
-  from:P.salon, to:P.ch2,
-  html:cap('PIÈCE','Chambre 2','13,98 m²','Chambre côté cour, desservie par le dégagement.') },
-
-{ id:'sdb', chip:'Salle de bain', img:'plan', dur:3400, bg:'#ffffff', vig:0, scrim:0,
-  from:P.ch2, to:P.sdb,
-  html:cap('PIÈCE','Salle de bain','2,31 m²','Pièce d’eau attenante à la chambre 2.') },
-
-{ id:'chambre1', chip:'Chambre 1', img:'plan', dur:3800, bg:'#ffffff', vig:0, scrim:0,
-  from:P.sdb, to:P.ch1,
-  html:cap('PIÈCE','Chambre 1','12,25 m²','Chambre côté façade, à l’opposé des pièces de vie.') },
-
-{ id:'toilette', chip:'Toilette', img:'plan', dur:3200, bg:'#ffffff', vig:0, scrim:0,
-  from:P.ch1, to:P.toil,
-  html:cap('PIÈCE','Toilette visiteur','3,08 m²','Près de l’entrée, indépendante de la salle de bain.') },
-
-{ id:'stationnement', chip:'Stationnement', img:'plan', dur:3400, bg:'#ffffff', vig:0, scrim:0,
-  from:P.toil, to:P.park,
-  html:cap('EXTÉRIEUR','Stationnement',null,'Emplacement en façade, hors surface habitable.') },
-
-{ id:'surfaces', chip:'Surfaces', img:'plan', dur:5500, bg:'#ffffff', vig:0, scrim:0,
-  from:{span:1.04,fx:.5,fy:.5,dx:-0.26}, to:P.surf,
-  html:`<div class="panel">
-      <div class="eyebrow">RÉCAPITULATIF</div>
-      <h2>Les surfaces<br>du rez-de-chaussée</h2>
-      <div class="rows">
-        ${row('Séjour','21,87 m²')}${row('Salon','17,50 m²')}${row('Chambre 2','13,98 m²')}
-        ${row('Chambre 1','12,25 m²')}${row('Cuisine','6,00 m²')}${row('Toilette visiteur','3,08 m²')}
-        ${row('Salle de bain','2,31 m²')}
-        <div class="row total"><div class="k">TOTAL DES PIÈCES</div><div class="v">76,99 m²</div></div>
-      </div>
-    </div>` },
-
-{ id:'programme', chip:'Le programme', img:'rue', dur:4200, bg:'#081538', vig:1, scrim:1,
-  from:{zoom:1.12,fx:.46,fy:.50}, to:{zoom:1.0,fx:.44,fy:.48},
-  html:cap('LE PROGRAMME','As Salam Sa Keur',null,'Accessibilité, confort et tranquillité, impact durable, évolution : la villa ZAHRA est conçue pour grandir avec la famille.') },
-
-{ id:'conditions', chip:'Conditions', img:'rue', dur:6000, bg:'#081538', vig:1, scrim:1,
-  from:{zoom:1.0,fx:.44,fy:.48}, to:{zoom:1.07,fx:.40,fy:.50},
-  html:`<div class="panel">
-      <div class="eyebrow">CONDITIONS D’ACQUISITION</div>
-      <div class="big"><small>À PARTIR DE</small>17 000 000 FCFA<i>HORS TAXES</i></div>
-      <div class="rows">
-        ${row('Apport initial','3 500 000 FCFA')}
-        ${row('Mensualité','225 000 FCFA HT')}
-        ${row('Durée','60 mois')}
-        ${row('Étude de conformité du terrain','2 mois')}
-        ${row('Livraison','18 mois')}
-      </div>
-      <p class="lede" style="margin:0">Montants hors taxes. Délai de livraison compté après validation du terrain.</p>
-    </div>` },
-
-{ id:'contact', chip:'Contact', img:'rue', dur:5500, bg:'#081538', vig:1, scrim:1,
-  from:{zoom:1.07,fx:.40,fy:.50}, to:{zoom:1.13,fx:.44,fy:.48},
-  html:`<div class="panel center">
-      <div class="eyebrow">KATOS CONSTRUCTION</div>
-      <h2>Parlons de votre villa</h2>
-      <p class="lede">Étude technique, construction aux normes, suivi du chantier à distance via KATOS&nbsp;CONNECT.</p>
-      <div class="contactline">
-        Service commercial<br>
-        +221 77 032 69 90<br>
-        <span>contact@katosconsulting.com</span>
-      </div>
-      <div class="pill">www.katosconsulting.com</div>
-    </div>` }
+/* ---------- données ---------- */
+const CLIPS = [
+  {src:'videos/01-facade.mp4',   dur:21.7},
+  {src:'videos/02-entree.mp4',   dur:4.0},
+  {src:'videos/03-sejour.mp4',   dur:28.0},
+  {src:'videos/04-chambre1.mp4', dur:36.0},
+  {src:'videos/05-salon.mp4',    dur:84.0},
+  {src:'videos/06-cuisine.mp4',  dur:24.9},
+  {src:'videos/07-cour.mp4',     dur:10.0}
 ];
+const STOPS = [
+  {id:'facade',   clip:0, t:0,    zone:'Extérieur', title:'Façade principale', img:'facade',  note:'Entrée abritée, stationnement intégré sous auvent.'},
+  {id:'entree',   clip:1, t:0,    zone:'Extérieur', title:'Entrée',            img:'entree',  note:'La porte d’entrée s’ouvre directement sur le séjour.'},
+  {id:'sejour',   clip:2, t:0,    zone:'Pièce',     title:'Séjour',            img:'sejour',  m2:'21,87 m²', note:'La plus grande pièce de la villa, en prolongement de l’entrée.', room:true},
+  {id:'degagement',clip:2,t:14,   zone:'Circulation',title:'Dégagement',       img:'degagement', note:'Le couloir qui dessert les chambres et la salle de bain.'},
+  {id:'toilette', clip:3, t:0,    zone:'Pièce',     title:'Toilette visiteur', img:'toilette', m2:'3,08 m²', note:'Près de l’entrée, indépendante de la salle de bain.', room:true},
+  {id:'chambre1', clip:3, t:14.5, zone:'Pièce',     title:'Chambre 1',         img:'chambre1', m2:'12,25 m²', note:'Chambre côté façade, à l’opposé des pièces de vie.', room:true},
+  {id:'salon',    clip:4, t:8,    zone:'Pièce',     title:'Salon',             img:'salon',   m2:'17,50 m²', note:'Séparé du séjour, pour recevoir sans traverser la maison.', room:true},
+  {id:'chambre2', clip:4, t:41,   zone:'Pièce',     title:'Chambre 2',         img:'chambre2', m2:'13,98 m²', note:'Chambre côté cour, desservie par le dégagement.', room:true},
+  {id:'sdb',      clip:4, t:52,   zone:'Pièce',     title:'Salle de bain',     img:'sdb',     m2:'2,31 m²', note:'Pièce d’eau attenante à la chambre 2.', room:true},
+  {id:'cuisine',  clip:5, t:0,    zone:'Pièce',     title:'Cuisine',           img:'cuisine', m2:'6,00 m²', note:'Ouverte sur l’arrière, avec accès direct à la cour.', room:true},
+  {id:'cour',     clip:5, t:15.5, zone:'Extérieur', title:'Cour arrière',      img:'cour',    note:'Espace extérieur arboré à l’arrière de la villa.'},
+  {id:'aerien',   clip:6, t:7.6,  zone:'Extérieur', title:'Vue aérienne',      img:'aerien',  note:'Toit-terrasse et implantation sur la parcelle.'}
+];
+const ROOM_ORDER = ['sejour','salon','chambre2','chambre1','cuisine','toilette','sdb'];
+const TOTAL_M2 = 76.99;
 
-function cap(eyebrow,title,m2,note){
-  return `<div class="cap"><div class="eyebrow">${eyebrow}</div><h2>${title}</h2>`
-    + (m2?`<div class="m2">${m2}</div>`:'')
-    + (note?`<p>${note}</p>`:'') + `</div>`;
-}
-function row(k,v){ return `<div class="row"><div class="k">${k}</div><div class="v">${v}</div></div>`; }
-
-/* ================= préparation ================= */
-let lay = 0;
-scenes.forEach((s,i)=>{
-  s.fade = i>0 && s.img !== scenes[i-1].img;
-  if(s.fade) lay = 1-lay;
-  s.layer = lay;
-  s.start = i===0 ? 0 : scenes[i-1].start + scenes[i-1].dur;
-});
-const TOTAL = scenes[scenes.length-1].start + scenes[scenes.length-1].dur;
-const NN = String(scenes.length).padStart(2,'0');
-
-const stage=document.getElementById('stage'), inner=stage.querySelector('.inner');
-const layers=[document.getElementById('la'),document.getElementById('lb')];
-const bgEl=document.getElementById('bg'), vigEl=document.getElementById('vig'),
-      scrimEl=document.getElementById('scrim'), ovEl=document.getElementById('ov'),
-      barEl=document.getElementById('bar'), ctext=document.getElementById('ctext'),
-      counter=document.getElementById('counter');
+/* ---------- utilitaires ---------- */
+const $ = id => document.getElementById(id);
+const pad = n => String(n).padStart(2,'0');
+const fmt = s => { s=Math.max(0,Math.round(s)); return Math.floor(s/60)+':'+pad(s%60); };
+const offs = []; CLIPS.reduce((a,c,i)=>(offs[i]=a, a+c.dur),0);
+const TOTAL = offs[CLIPS.length-1] + CLIPS[CLIPS.length-1].dur;
+const gStart = s => offs[s.clip] + s.t;
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-Object.keys(NAT).forEach(k=>{ const im=new Image(); im.src=SRC[k]; });
+/* ---------- construction des listes ---------- */
+const stopsEl = $('stops');
+STOPS.forEach((s,i)=>{
+  const li=document.createElement('li');
+  li.innerHTML=`<button class="stop" type="button" data-i="${i}">
+    <span class="n num">${pad(i+1)}</span><img src="media/${s.img}.jpg" alt="" loading="lazy">
+    <span><span class="t">${s.title}</span><span class="z">${s.m2 ? s.m2 : s.zone}</span></span></button>`;
+  stopsEl.appendChild(li);
+});
+stopsEl.addEventListener('click',e=>{ const b=e.target.closest('.stop'); if(b) goStop(+b.dataset.i, true); });
 
-/* ================= caméra ================= */
-function kOf(img,pose,W,H){
-  const [iw,ih]=NAT[img];
-  if(pose.wspan) return W/(pose.wspan*iw);   // cadrage par la largeur (pièces)
-  if(pose.span)  return H/(pose.span*ih);    // cadrage par la hauteur (plan entier)
-  return Math.max(W/iw,H/ih)*(pose.zoom||1); // photos : recouvrement
-}
-function poseAt(sc,p,W,H){
-  const a=sc.from,b=sc.to;
-  const e = reduced ? 1 : easeOut(Math.min(p/0.58,1));
-  const ka=kOf(sc.img,a,W,H), kb=kOf(sc.img,b,W,H);
-  const drift = reduced ? 1 : 1 + 0.028*p;
-  const k  = Math.exp(Math.log(ka)+(Math.log(kb)-Math.log(ka))*e)*drift;
-  const fx = a.fx+(b.fx-a.fx)*e, fy = a.fy+(b.fy-a.fy)*e;
-  const dxa=a.dx||0, dxb=b.dx||0, dya=a.dy||0, dyb=b.dy||0;
-  const dx = dxa+(dxb-dxa)*e, dy = dya+(dyb-dya)*e;
-  const [iw,ih]=NAT[sc.img];
-  const tx = -k*(fx-0.5)*iw + dx*W;
-  const ty = -k*(fy-0.5)*ih + dy*H;
-  return `translate(-50%,-50%) translate(${tx.toFixed(1)}px,${ty.toFixed(1)}px) scale(${k.toFixed(4)})`;
-}
-const easeOut = p => 1-Math.pow(1-p,3);
+const roomsEl=$('rooms');
+ROOM_ORDER.forEach(id=>{
+  const i=STOPS.findIndex(s=>s.id===id), s=STOPS[i];
+  const b=document.createElement('button'); b.type='button'; b.className='room';
+  b.innerHTML=`<div class="im"><img src="media/${s.img}.jpg" alt="${s.title} de la villa ZAHRA" loading="lazy">
+    <span class="play"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg>VOIR</span></div>
+    <div class="body"><div class="row1"><h3>${s.title}</h3><span class="m2 num">${s.m2}</span></div><p>${s.note}</p></div>`;
+  b.onclick=()=>{ document.getElementById('visite').scrollIntoView({behavior:reduced?'auto':'smooth'}); goStop(i,true); };
+  roomsEl.appendChild(b);
+});
+/* dernière carte : la cour, pour remplir la grille de 3 colonnes */
+(()=>{const i=STOPS.findIndex(s=>s.id==='cour'), s=STOPS[i];
+  const b=document.createElement('button'); b.type='button'; b.className='room';
+  b.innerHTML=`<div class="im"><img src="media/cour2.jpg" alt="Cour arrière de la villa ZAHRA" loading="lazy">
+    <span class="play"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg>VOIR</span></div>
+    <div class="body"><div class="row1"><h3>Cour arrière</h3><span class="m2">Extérieur</span></div><p>${s.note}</p></div>`;
+  b.onclick=()=>{ document.getElementById('visite').scrollIntoView({behavior:reduced?'auto':'smooth'}); goStop(i,true); };
+  roomsEl.appendChild(b);})();
 
-/* ================= lecture ================= */
-let t=0, playing=true, last=null, cur=-1;
-let ovNode=null, ovDelay=850, ovShift='';
-const FADE=800;
+const tableEl=$('table');
+const max=21.87;
+ROOM_ORDER.forEach(id=>{
+  const s=STOPS.find(x=>x.id===id); const v=parseFloat(s.m2.replace(',','.'));
+  tableEl.insertAdjacentHTML('beforeend',`<div class="trow"><span class="k">${s.title}</span>
+    <span class="b"><i style="width:${(v/max*100).toFixed(1)}%"></i></span><span class="v num">${s.m2}</span></div>`);
+});
+tableEl.insertAdjacentHTML('beforeend',`<div class="trow total"><span class="k">TOTAL DES PIÈCES</span><span class="v num">76,99 m²</span></div>`);
 
-function mount(i){
-  const sc=scenes[i];
-  const L=layers[sc.layer];
-  if(L.dataset.img!==sc.img){
-    L.src=SRC[sc.img];
-    L.style.width=NAT[sc.img][0]+'px';
-    L.style.height=NAT[sc.img][1]+'px';
-    L.dataset.img=sc.img;
+/* ---------- lecteur ---------- */
+const vid=$('vid'), cap=$('cap'), ctr=$('ctr'), fill=$('fill'), track=$('track'), timeEl=$('time'), startBtn=$('start');
+let clip=-1, cur=-1, pendingSeek=null, started=false;
+const NN=pad(STOPS.length);
+
+STOPS.forEach(s=>{ const tk=document.createElement('span'); tk.className='tick'; tk.style.left=(gStart(s)/TOTAL*100)+'%'; track.appendChild(tk); });
+
+function loadClip(c, t, autoplay){
+  if(c!==clip){
+    clip=c; pendingSeek=t; vid.src=CLIPS[c].src; vid.load();
+    if(autoplay) vid.play().catch(()=>{});
+  } else {
+    try{ vid.currentTime=t; }catch(e){}
+    if(autoplay) vid.play().catch(()=>{});
   }
-  layers[sc.layer].style.zIndex=2;
-  layers[1-sc.layer].style.zIndex=1;
-  bgEl.style.backgroundColor=sc.bg;
-  ovEl.innerHTML=sc.html;
-  ovNode=ovEl.firstElementChild;
-  ovDelay = ovNode && ovNode.classList.contains('cap') ? 850
-          : ovNode && ovNode.classList.contains('hero') ? 500 : 700;
-  ovShift = ovNode && ovNode.classList.contains('center') ? 'translateX(-50%) ' : '';
-  ctext.textContent=String(i+1).padStart(2,'0')+' / '+NN;
-  counter.classList.toggle('on-paper', sc.bg==='#ffffff');
-  [...document.querySelectorAll('.chip')].forEach((c,j)=>c.setAttribute('aria-current', j===i?'true':'false'));
-  cur=i;
 }
-function indexAt(ms){
-  for(let i=scenes.length-1;i>=0;i--) if(ms>=scenes[i].start) return i;
-  return 0;
-}
-function frame(ts){
-  if(last===null) last=ts;
-  const dt=ts-last; last=ts;
-  if(window.__vt!=null){ t=window.__vt; }   // horloge externe (rendu image par image)
-  else if(playing){
-    t+=dt;
-    if(t>=TOTAL){ t=TOTAL-1; playing=false; syncPlay(); }
-  }
-  const i=indexAt(t), sc=scenes[i];
-  if(i!==cur) mount(i);
-  const local=t-sc.start, p=Math.min(1,local/sc.dur);
-  const W=inner.clientWidth, H=inner.clientHeight;
-  layers[sc.layer].style.transform=poseAt(sc,p,W,H);
-  const a = sc.fade && !reduced ? Math.min(1,local/FADE) : 1;
-  layers[sc.layer].style.opacity=a;
-  layers[1-sc.layer].style.opacity= sc.fade ? (1-a) : 0;
-  const pv = i>0 ? scenes[i-1] : sc;             // voile et vignette suivent le fondu
-  vigEl.style.opacity   = (pv.vig   + (sc.vig  -pv.vig  )*a).toFixed(3);
-  scrimEl.style.opacity = (pv.scrim + (sc.scrim-pv.scrim)*a).toFixed(3);
-  if(ovNode){                                     // le cartouche monte une fois la caméra arrivée
-    const q = reduced ? 1 : Math.max(0,Math.min(1,(local-ovDelay)/650));
-    const e = easeOut(q);
-    ovNode.style.opacity = e.toFixed(3);
-    ovNode.style.transform = ovShift + 'translateY(' + ((1-e)*14).toFixed(1) + 'px)';
-  }
-  barEl.style.width=(t/TOTAL*100).toFixed(2)+'%';
-  requestAnimationFrame(frame);
-}
+vid.addEventListener('loadedmetadata',()=>{ if(pendingSeek!=null){ try{vid.currentTime=pendingSeek;}catch(e){} pendingSeek=null; } });
+vid.addEventListener('ended',()=>{ if(clip<CLIPS.length-1) loadClip(clip+1,0,true); else { setPlayIcon(); } });
+vid.addEventListener('play',setPlayIcon); vid.addEventListener('pause',setPlayIcon);
+vid.addEventListener('timeupdate',tick);
 
-/* ================= commandes ================= */
-const playBtn=document.getElementById('play');
-function syncPlay(){ playBtn.textContent = playing ? 'PAUSE' : 'LECTURE'; }
-function seek(ms){ t=Math.max(0,Math.min(TOTAL-1,ms)); const i=indexAt(t); mount(i); }
-
-playBtn.onclick=()=>{ if(t>=TOTAL-1) t=0; playing=!playing; syncPlay(); };
-document.getElementById('next').onclick=()=>{ seek(scenes[Math.min(scenes.length-1,indexAt(t)+1)].start); };
-document.getElementById('prev').onclick=()=>{
-  const i=indexAt(t);
-  seek(t-scenes[i].start < 600 && i>0 ? scenes[i-1].start : scenes[i].start);
+function stopAt(c,t){
+  let k=0;
+  STOPS.forEach((s,i)=>{ if(s.clip<c || (s.clip===c && s.t<=t+0.05)) k=i; });
+  return k;
+}
+function show(i){
+  if(i===cur) return; cur=i;
+  const s=STOPS[i];
+  ctr.textContent=pad(i+1)+' / '+NN;
+  cap.classList.add('out');
+  setTimeout(()=>{
+    cap.innerHTML=`<div class="eyebrow">${s.zone}</div><h3>${s.title}</h3>${s.m2?`<div class="m2 num">${s.m2}</div>`:''}<p>${s.note}</p>`;
+    requestAnimationFrame(()=>cap.classList.remove('out'));
+  }, reduced?0:260);
+  [...stopsEl.querySelectorAll('.stop')].forEach((b,j)=>b.setAttribute('aria-current', j===i?'true':'false'));
+  const act=stopsEl.querySelector('[aria-current="true"]');
+  if(act){ const li=act.parentElement, box=stopsEl;
+    if(box.scrollWidth>box.clientWidth) box.scrollTo({left:li.offsetLeft-box.clientWidth/2+li.offsetWidth/2,behavior:reduced?'auto':'smooth'});
+    else box.scrollTo({top:li.offsetTop-box.clientHeight/2+li.offsetHeight/2,behavior:reduced?'auto':'smooth'}); }
+}
+function tick(){
+  if(clip<0) return;
+  const t=vid.currentTime||0, g=offs[clip]+t;
+  fill.style.width=(g/TOTAL*100).toFixed(2)+'%';
+  track.setAttribute('aria-valuenow',Math.round(g/TOTAL*100));
+  timeEl.textContent=fmt(g)+' / '+fmt(TOTAL);
+  if(pendingSeek==null) show(stopAt(clip,t));
+}
+function begin(){ if(started) return; started=true; startBtn.hidden=true; }
+function goStop(i, play){
+  begin(); i=Math.max(0,Math.min(STOPS.length-1,i));
+  const s=STOPS[i]; loadClip(s.clip, s.t, play); show(i);
+}
+function seekGlobal(g){
+  begin(); g=Math.max(0,Math.min(TOTAL-0.1,g));
+  let c=0; for(let k=0;k<CLIPS.length;k++) if(g>=offs[k]) c=k;
+  const wasPlaying=!vid.paused || clip<0;
+  loadClip(c, g-offs[c], wasPlaying); show(stopAt(c,g-offs[c]));
+}
+function setPlayIcon(){
+  $('playIco').innerHTML = vid.paused ? '<path d="M7 4.5v15l13-7.5z"/>' : '<path d="M6 4h4v16H6zM14 4h4v16h-4z"/>';
+  $('play').setAttribute('aria-label', vid.paused ? 'Lecture' : 'Pause');
+}
+function toggle(){
+  if(!started){ goStop(0,true); return; }
+  if(vid.paused){ if(clip===CLIPS.length-1 && vid.ended){ goStop(0,true); } else vid.play().catch(()=>{}); }
+  else vid.pause();
+}
+startBtn.onclick=()=>goStop(0,true);
+$('heroPlay').addEventListener('click',()=>setTimeout(()=>{ if(!started) goStop(0,true); }, reduced?0:450));
+$('play').onclick=toggle;
+$('next').onclick=()=>goStop((cur<0?-1:cur)+1,true);
+$('prev').onclick=()=>{
+  if(cur<0) return goStop(0,true);
+  const s=STOPS[cur], local=(vid.currentTime||0)-s.t;
+  goStop(local<1.5 && s.clip===clip ? cur-1 : cur, true);
 };
-document.getElementById('restart').onclick=()=>{ seek(0); playing=true; syncPlay(); };
-document.getElementById('fs').onclick=()=>{
-  const el=stage;
+$('fs').onclick=()=>{
+  const el=$('screen');
   if(document.fullscreenElement){ document.exitFullscreen?.(); return; }
-  el.requestFullscreen?.().catch(()=>{});
+  if(el.requestFullscreen) el.requestFullscreen().catch(()=>{});
+  else if(vid.webkitEnterFullscreen) vid.webkitEnterFullscreen();
 };
-const uiBtn=document.getElementById('ui');
-uiBtn.onclick=()=>{
-  const on=!document.body.classList.contains('clean');
-  document.body.classList.toggle('clean',on);
-  stage.classList.toggle('clean',on);
-  uiBtn.textContent = on ? 'AFFICHER L’INTERFACE' : 'MASQUER L’INTERFACE';
-};
+function trackPos(e){ const r=track.getBoundingClientRect(); return (e.clientX-r.left)/r.width*TOTAL; }
+let dragging=false;
+track.addEventListener('pointerdown',e=>{ dragging=true; track.setPointerCapture(e.pointerId); seekGlobal(trackPos(e)); });
+track.addEventListener('pointerup',e=>{ if(dragging){ dragging=false; seekGlobal(trackPos(e)); } });
+track.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowLeft'){ e.preventDefault(); e.stopPropagation();
+    const g=(clip<0?0:offs[clip]+vid.currentTime)+(e.key==='ArrowRight'?5:-5); seekGlobal(g); }
+});
 addEventListener('keydown',e=>{
-  if(e.key===' '){ e.preventDefault(); playBtn.click(); }
-  else if(e.key==='ArrowRight') document.getElementById('next').click();
-  else if(e.key==='ArrowLeft') document.getElementById('prev').click();
+  if(e.target.closest('input,textarea')) return;
+  const r=$('visite').getBoundingClientRect(); if(r.bottom<0||r.top>innerHeight) return;
+  if(e.key===' ' && !e.target.closest('button,a')){ e.preventDefault(); toggle(); }
+  else if(e.key==='ArrowRight' && e.target!==track){ $('next').click(); }
+  else if(e.key==='ArrowLeft' && e.target!==track){ $('prev').click(); }
 });
 
-const chips=document.getElementById('chips');
-scenes.forEach((s,i)=>{
-  const b=document.createElement('button');
-  b.className='chip'; b.type='button'; b.textContent=s.chip;
-  b.onclick=()=>{ seek(s.start); };
-  chips.appendChild(b);
-});
+/* état initial : première étape affichée, vidéo prête */
+clip=0; vid.src=CLIPS[0].src; show(0); timeEl.textContent='0:00 / '+fmt(TOTAL);
 
-/* première image rendue immédiatement, puis lecture */
-mount(0);
-layers[0].style.opacity=1;
-syncPlay();
-requestAnimationFrame(frame);
+/* ---------- copier ---------- */
+document.querySelectorAll('.copy').forEach(b=>{
+  b.onclick=()=>{
+    const el=$(b.dataset.copy), txt=el.textContent.trim();
+    const done=()=>{ b.textContent='Copié'; b.classList.add('ok'); setTimeout(()=>{b.textContent='Copier'; b.classList.remove('ok');},1600); };
+    const sel=()=>{ const r=document.createRange(); r.selectNodeContents(el); const s=getSelection(); s.removeAllRanges(); s.addRange(r); };
+    try{ navigator.clipboard.writeText(txt).then(done, sel); }catch(e){ sel(); }
+  };
+});
 </script>
+</body>
+</html>
