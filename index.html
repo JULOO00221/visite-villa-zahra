@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,900&display=swap" rel="stylesheet">
 <style>
 /* Mise en page : un « plateau » de visite cinéma en tête, puis la fiche de la villa
-   déroulée comme un dossier de vente KATOS (pièces → surfaces → atouts → conditions → contact).
+   déroulée comme un dossier de vente KATOS (pièces → surfaces → atouts → délais → contact).
    Identité KATOS conservée : bleu nuit, accent orange, Montserrat. Un seul univers sombre, assumé. */
 :root{
   --ink:#050e26;        /* fond page */
@@ -235,7 +235,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
       <a href="#pieces">Pièces</a>
       <a href="#surfaces">Surfaces</a>
       <a href="#atouts">Atouts</a>
-      <a href="#conditions">Conditions</a>
+      <a href="#delais">Délais</a>
       <a href="#contact">Contact</a>
       <a class="cta" href="#visite">Visite</a>
     </nav>
@@ -253,7 +253,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
       <p>Une villa F3 de plain-pied, livrée avec des fondations prêtes pour une extension R+1.</p>
       <div class="actions">
         <a class="btn primary" href="#visite" id="heroPlay"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg>Lancer la visite</a>
-        <a class="btn" href="#conditions">À partir de 17 000 000 FCFA HT</a>
+        <a class="btn" href="#contact">Nous contacter</a>
       </div>
     </div>
   </div>
@@ -349,26 +349,19 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
     </div>
   </section>
 
-  <!-- ================= CONDITIONS ================= -->
-  <section id="conditions" class="band">
+  <!-- ================= DÉLAIS ================= -->
+  <section id="delais" class="band">
     <div class="wrap cond">
       <div>
-        <div class="eyebrow">Conditions d’acquisition</div>
-        <div class="price" style="margin-top:22px">
-          <small>À PARTIR DE</small>
-          <div class="big num">17 000 000<span>FCFA</span></div>
-          <i>HORS TAXES</i>
-        </div>
+        <div class="eyebrow">Calendrier du projet</div>
+        <h2 class="sec">De l’étude du terrain à la remise des clés</h2>
       </div>
       <div>
         <div class="rows">
-          <div class="r"><span class="k">Apport initial</span><span class="v num">3 500 000 FCFA</span></div>
-          <div class="r"><span class="k">Mensualité</span><span class="v num">225 000 FCFA HT</span></div>
-          <div class="r"><span class="k">Durée</span><span class="v num">60 mois</span></div>
           <div class="r"><span class="k">Étude de conformité du terrain</span><span class="v num">2 mois</span></div>
           <div class="r"><span class="k">Livraison</span><span class="v num">18 mois</span></div>
         </div>
-        <p class="note">Montants hors taxes. Le délai de livraison court à partir de la validation du terrain.</p>
+        <p class="note">Le délai de livraison court à partir de la validation du terrain.</p>
       </div>
     </div>
   </section>
