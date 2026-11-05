@@ -6,7 +6,7 @@
 <title>Villa AICHA</title>
 <meta property="og:title" content="Villa AICHA · Visite virtuelle">
 <meta property="og:image" content="/f6/media/facade.jpg">
-<link rel="icon" href="/media/logo.png">
+<link rel="icon" href="/f6/media/logo.png">
 <meta name="description" content="Visite virtuelle de la villa F6 AICHA, programme As Salam Sa Keur, KATOS Construction.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,7 +62,7 @@ nav.menu a.cta:hover{background:#ff7d1f}
 
 /* ---------- ouverture ---------- */
 .hero{position:relative;overflow:hidden;min-height:clamp(480px,74vh,760px);display:flex;align-items:flex-end}
-.hero .ph{position:absolute;inset:0;background:url(media/facade.jpg) 45% 62%/cover no-repeat;transform-origin:60% 55%;animation:drift 22s ease-out both}
+.hero .ph{position:absolute;inset:0;background:url(/f6/media/facade.jpg) 45% 62%/cover no-repeat;transform-origin:60% 55%;animation:drift 22s ease-out both}
 @keyframes drift{from{transform:scale(1.1)}to{transform:scale(1)}}
 @media (prefers-reduced-motion:reduce){.hero .ph{animation:none}}
 .hero::after{content:"";position:absolute;inset:0;background:
@@ -114,7 +114,7 @@ nav.menu a.cta:hover{background:#ff7d1f}
 .counter{position:absolute;right:16px;top:14px;display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.18em;text-shadow:0 1px 6px rgba(5,14,38,.7)}
 .counter i{width:7px;height:7px;border-radius:50%;background:var(--orange)}
 .start{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
-  background:rgba(5,14,38,.45) url(media/facade.jpg) center/cover;background-blend-mode:multiply;border:0;color:#fff;cursor:pointer;width:100%}
+  background:rgba(5,14,38,.45) url(/f6/media/facade.jpg) center/cover;background-blend-mode:multiply;border:0;color:#fff;cursor:pointer;width:100%}
 .start .disc{width:84px;height:84px;border-radius:50%;background:var(--orange);display:grid;place-items:center;box-shadow:0 0 0 10px rgba(242,108,13,.25)}
 .start .disc svg{width:30px;height:30px;fill:#fff;margin-left:5px}
 .start b{font-size:clamp(15px,1.6vw,19px);font-weight:900;letter-spacing:.14em;text-transform:uppercase}
@@ -241,7 +241,7 @@ nav.menu a.switch{color:#fff;border:1px solid rgba(195,203,230,.32)}
 <body>
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#top" aria-label="KATOS Construction, retour en haut"><img src="media/logo.png" alt="KATOS Construction"></a>
+    <a class="brand" href="#top" aria-label="KATOS Construction, retour en haut"><img src="/f6/media/logo.png" alt="KATOS Construction"></a>
     <nav class="menu" aria-label="Sections">
       <a href="#pieces">Pièces</a>
       <a href="#surfaces">Surfaces</a>
@@ -290,7 +290,7 @@ nav.menu a.switch{color:#fff;border:1px solid rgba(195,203,230,.32)}
       <div class="tour">
         <div class="player">
           <div class="screen" id="screen">
-            <video id="vid" playsinline muted preload="metadata" poster="media/facade-v.jpg"></video>
+            <video id="vid" playsinline muted preload="metadata" poster="/f6/media/facade-v.jpg"></video>
             <div class="scrim"></div>
             <div class="counter" aria-live="polite"><i></i><span id="ctr" class="num">01 / 21</span></div>
             <div class="cap out" id="cap"></div>
@@ -339,11 +339,11 @@ nav.menu a.switch{color:#fff;border:1px solid rgba(195,203,230,.32)}
       <div class="levels">
         <div class="level">
           <div><h3 class="lvl" style="margin-top:0">Rez-de-chaussée</h3><div class="table" id="table-rdc"></div></div>
-          <figure class="plan"><img src="media/plan3d-rdc.jpg" alt="Plan 3D du rez-de-chaussée de la villa AICHA" loading="lazy" width="1920" height="1357"><figcaption>Vue en plan 3D du rez-de-chaussée</figcaption></figure>
+          <figure class="plan"><img src="/f6/media/plan3d-rdc.jpg" alt="Plan 3D du rez-de-chaussée de la villa AICHA" loading="lazy" width="1920" height="1357"><figcaption>Vue en plan 3D du rez-de-chaussée</figcaption></figure>
         </div>
         <div class="level">
           <div><h3 class="lvl" style="margin-top:0">Étage</h3><div class="table" id="table-etage"></div></div>
-          <figure class="plan"><img src="media/plan3d-etage.jpg" alt="Plan 3D de l’étage de la villa AICHA" loading="lazy" width="1920" height="1357"><figcaption>Vue en plan 3D de l’étage</figcaption></figure>
+          <figure class="plan"><img src="/f6/media/plan3d-etage.jpg" alt="Plan 3D de l’étage de la villa AICHA" loading="lazy" width="1920" height="1357"><figcaption>Vue en plan 3D de l’étage</figcaption></figure>
         </div>
       </div>
       <p class="note">Surfaces cotées sur les plans. Le séjour de l’étage, la toilette de la chambre 3, les cours et le toit-terrasse sont hors de ces totaux. Terrain de 10 × 15 m.</p>
@@ -412,9 +412,9 @@ nav.menu a.switch{color:#fff;border:1px solid rgba(195,203,230,.32)}
 <script>
 /* ---------- données ---------- */
 const CLIPS = [
-  {src:'videos/01-rdc.mp4',       dur:156.0},
-  {src:'videos/02-etage.mp4',     dur:142.0},
-  {src:'videos/03-exterieur.mp4', dur:14.7}
+  {src:'/f6/videos/01-rdc.mp4',       dur:156.0},
+  {src:'/f6/videos/02-etage.mp4',     dur:142.0},
+  {src:'/f6/videos/03-exterieur.mp4', dur:14.7}
 ];
 const R='Rez-de-chaussée', E='Étage', X='Extérieur';
 const STOPS = [
@@ -455,7 +455,7 @@ const stopsEl = $('stops');
 STOPS.forEach((s,i)=>{
   const li=document.createElement('li');
   li.innerHTML=`<button class="stop" type="button" data-i="${i}">
-    <span class="n num">${pad(i+1)}</span><img src="media/${s.img}.jpg" alt="" loading="lazy">
+    <span class="n num">${pad(i+1)}</span><img src="/f6/media/${s.img}.jpg" alt="" loading="lazy">
     <span><span class="t">${s.title}</span><span class="z">${s.m2 ? s.m2 : s.zone}</span></span></button>`;
   stopsEl.appendChild(li);
 });
@@ -577,7 +577,7 @@ document.querySelectorAll('.copy').forEach(b=>{
 /* ---------- pièces et surfaces ---------- */
 function roomCard(i){
   const s=STOPS[i]; const b=document.createElement('button'); b.type='button'; b.className='room';
-  b.innerHTML=`<div class="im"><img src="media/${s.img}.jpg" alt="${s.title} de la villa AICHA" loading="lazy">
+  b.innerHTML=`<div class="im"><img src="/f6/media/${s.img}.jpg" alt="${s.title} de la villa AICHA" loading="lazy">
     <span class="play"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg>VOIR</span></div>
     <div class="body"><div class="row1"><h3>${s.title}</h3><span class="m2 num">${s.m2||''}</span></div><p>${s.note}</p></div>`;
   b.onclick=()=>{ document.getElementById('visite').scrollIntoView({behavior:reduced?'auto':'smooth'}); goStop(i,true); };
