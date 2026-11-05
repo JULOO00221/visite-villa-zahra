@@ -58,7 +58,8 @@ nav.menu a{text-decoration:none;font-size:13px;font-weight:700;letter-spacing:.0
 nav.menu a:hover{color:#fff;background:rgba(195,203,230,.1)}
 nav.menu a.cta{background:var(--orange);color:#fff}
 nav.menu a.cta:hover{background:#ff7d1f}
-@media (max-width:820px){nav.menu a:not(.cta){display:none}}
+nav.menu a.switch{color:#fff;border:1px solid rgba(195,203,230,.32)}
+@media (max-width:820px){nav.menu a:not(.cta):not(.switch){display:none}}
 
 /* ---------- ouverture ---------- */
 .hero{position:relative;overflow:hidden;min-height:clamp(480px,74vh,760px);display:flex;align-items:flex-end}
@@ -237,6 +238,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
       <a href="#atouts">Atouts</a>
       <a href="#delais">Délais</a>
       <a href="#contact">Contact</a>
+      <a class="switch" href="/f6/">Villa AICHA · F6</a>
       <a class="cta" href="#visite">Visite</a>
     </nav>
   </div>
@@ -373,7 +375,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
         <div class="eyebrow">KATOS Construction</div>
         <h2 class="sec">Parlons de votre villa</h2>
         <p class="lede">Étude technique, construction aux normes, suivi du chantier à distance via KATOS&nbsp;CONNECT.</p>
-        <div class="actions"><a class="btn" href="#visite">Revoir la visite</a></div>
+        <div class="actions"><a class="btn" href="#visite">Revoir la visite</a><a class="btn" href="/f6/">Voir la villa AICHA (F6)</a></div>
       </div>
       <div class="card">
         <div class="cline"><span class="lbl">SERVICE COMMERCIAL</span><span class="val num" id="tel">+221 77 032 69 90</span><button class="copy" type="button" data-copy="tel">Copier</button></div>

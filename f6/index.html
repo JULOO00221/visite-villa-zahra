@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Villa AICHA</title>
+<meta property="og:title" content="Villa AICHA · Visite virtuelle">
+<meta property="og:image" content="/f6/media/facade.jpg">
+<link rel="icon" href="/media/logo.png">
+<meta name="description" content="Visite virtuelle de la villa F6 AICHA, programme As Salam Sa Keur, KATOS Construction.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,900&display=swap" rel="stylesheet">
+<style>
+/* Villa AICHA (F6). Même gabarit que la villa ZAHRA : un « plateau » de visite cinéma en tête, puis la fiche de la villa
+   déroulée comme un dossier de vente KATOS (pièces → surfaces → atouts → délais → contact).
+   Identité KATOS conservée : bleu nuit, accent orange, Montserrat. Un seul univers sombre, assumé. */
+:root{
+  --ink:#050e26;        /* fond page */
+  --navy:#0e1f5b;       /* bleu KATOS */
+  --panel:#0b1946;      /* surfaces */
+  --orange:#f26c0d;     /* accent */
+  --orange-soft:#ffa24d;/* chiffres */
+  --peach:#ffb87a;      /* surtitres */
+  --taupe:#8c7068;      /* enduit de la façade */
+  --fg:#ffffff;
+  --mist:#c3cbe6;
+  --dim:#8f9bc0;
+  --line:rgba(195,203,230,.18);
+  --font:'Montserrat','Helvetica Neue',Arial,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:calc(72px + env(safe-area-inset-top,0px))}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--fg);font-family:var(--font);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img,video{max-width:100%;display:block}
+a{color:inherit}
+button{font-family:inherit}
+:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.26em;text-transform:uppercase;color:var(--peach)}
+h2.sec{margin:8px 0 0;font-size:clamp(28px,4vw,44px);font-weight:900;line-height:1.05;letter-spacing:-.01em;text-wrap:balance}
+.lede{margin:14px 0 0;color:var(--mist);max-width:62ch;font-weight:500}
+section{padding-block:clamp(56px,8vw,96px)}
+.num{font-variant-numeric:tabular-nums}
+
+/* ---------- en-tête ---------- */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--ink)}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(5,14,38,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;gap:20px;height:64px}
+.brand{display:flex;align-items:center;background:#fff;border-radius:7px;padding:6px 11px;flex:none}
+.brand img{height:26px;width:auto}
+nav.menu{margin-left:auto;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+nav.menu::-webkit-scrollbar{display:none}
+nav.menu a{text-decoration:none;font-size:13px;font-weight:700;letter-spacing:.06em;color:var(--mist);padding:8px 12px;border-radius:6px;white-space:nowrap}
+nav.menu a:hover{color:#fff;background:rgba(195,203,230,.1)}
+nav.menu a.cta{background:var(--orange);color:#fff}
+nav.menu a.cta:hover{background:#ff7d1f}
+@media (max-width:820px){nav.menu a:not(.cta):not(.switch){display:none}}
+
+/* ---------- ouverture ---------- */
+.hero{position:relative;overflow:hidden;min-height:clamp(480px,74vh,760px);display:flex;align-items:flex-end}
+.hero .ph{position:absolute;inset:0;background:url(media/facade.jpg) 45% 62%/cover no-repeat;transform-origin:60% 55%;animation:drift 22s ease-out both}
+@keyframes drift{from{transform:scale(1.1)}to{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.hero .ph{animation:none}}
+.hero::after{content:"";position:absolute;inset:0;background:
+  linear-gradient(0deg,rgba(5,14,38,1) 0%,rgba(5,14,38,.55) 30%,rgba(5,14,38,0) 62%),
+  linear-gradient(90deg,rgba(5,14,38,.9) 0%,rgba(5,14,38,.5) 42%,rgba(5,14,38,0) 75%)}
+.hero .wrap{position:relative;z-index:1;width:100%;padding-block:0 clamp(36px,6vw,64px)}
+.kicker{font-size:13px;font-weight:800;letter-spacing:.34em;color:var(--peach)}
+.hero .l1{margin-top:14px;font-size:clamp(20px,2.4vw,30px);font-weight:500;letter-spacing:.06em;line-height:1}
+.hero h1{margin:2px 0 0;font-size:clamp(72px,13vw,168px);font-weight:900;font-style:italic;line-height:.88;letter-spacing:-.035em}
+.hero .rule{width:84px;height:6px;border-radius:3px;background:var(--orange);margin:22px 0 18px}
+.hero p{margin:0;max-width:46ch;font-size:clamp(16px,1.5vw,19px);font-weight:600;color:#e7ebf7}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.btn{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(195,203,230,.32);background:rgba(195,203,230,.12);color:#fff;
+  font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;padding:13px 20px;border-radius:8px;cursor:pointer}
+.btn:hover{background:rgba(195,203,230,.22)}
+.btn.primary{background:var(--orange);border-color:var(--orange)}
+.btn.primary:hover{background:#ff7d1f}
+.btn svg{width:16px;height:16px;fill:currentColor}
+
+.facts{border-block:1px solid var(--line);background:var(--navy)}
+.facts .wrap{display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}
+.fact{padding:22px 18px;border-left:1px solid var(--line);min-width:0}
+.fact:first-child{border-left:0;padding-left:0}
+.fact .v{font-size:clamp(22px,2.4vw,30px);font-weight:900;line-height:1.05;color:var(--orange-soft)}
+.fact .k{margin-top:6px;font-size:12.5px;font-weight:700;letter-spacing:.06em;color:var(--mist)}
+@media (max-width:900px){.facts .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fact{border-left:0;padding-left:0;border-top:1px solid var(--line)}
+  .fact:nth-child(-n+2){border-top:0}.fact:last-child{grid-column:1/-1}}
+
+/* ---------- visite ---------- */
+#visite{padding-top:clamp(48px,7vw,80px)}
+.tour{margin-top:30px;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:18px;align-items:start}
+@media (max-width:980px){.tour{grid-template-columns:minmax(0,1fr)}}
+.player{min-width:0}
+.screen{position:relative;width:100%;max-width:100%;aspect-ratio:16/9;background:#000;border-radius:10px;overflow:hidden;box-shadow:0 18px 60px rgba(0,0,0,.55)}
+.screen video{width:100%;height:100%;object-fit:cover}
+.screen:fullscreen{border-radius:0;aspect-ratio:auto;width:100vw;height:100vh}
+.screen:fullscreen video{object-fit:contain}
+.scrim{position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,rgba(5,14,38,.62) 0%,rgba(5,14,38,0) 42%)}
+.cap{position:absolute;left:clamp(12px,2.6%,28px);bottom:clamp(16px,4%,36px);max-width:min(64%,420px);
+  background:rgba(14,31,91,.93);border-left:5px solid var(--orange);border-radius:6px;padding:14px 18px 15px;
+  box-shadow:0 10px 30px rgba(5,14,38,.4);transition:opacity .45s,transform .45s}
+.cap.out{opacity:0;transform:translateY(10px)}
+.cap .eyebrow{font-size:10.5px}
+.cap h3{margin:5px 0 0;font-size:clamp(18px,2.4vw,28px);font-weight:900;line-height:1.05}
+.cap .m2{margin-top:6px;font-size:clamp(20px,2.6vw,32px);font-weight:900;color:var(--orange-soft);line-height:1}
+.cap p{margin:7px 0 0;font-size:clamp(12px,1.1vw,14px);font-weight:500;color:var(--mist);line-height:1.45}
+@media (max-width:560px){.cap p{display:none}.cap{padding:10px 13px}}
+.counter{position:absolute;right:16px;top:14px;display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.18em;text-shadow:0 1px 6px rgba(5,14,38,.7)}
+.counter i{width:7px;height:7px;border-radius:50%;background:var(--orange)}
+.start{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  background:rgba(5,14,38,.45) url(media/facade.jpg) center/cover;background-blend-mode:multiply;border:0;color:#fff;cursor:pointer;width:100%}
+.start .disc{width:84px;height:84px;border-radius:50%;background:var(--orange);display:grid;place-items:center;box-shadow:0 0 0 10px rgba(242,108,13,.25)}
+.start .disc svg{width:30px;height:30px;fill:#fff;margin-left:5px}
+.start b{font-size:clamp(15px,1.6vw,19px);font-weight:900;letter-spacing:.14em;text-transform:uppercase}
+.start span{font-size:13px;font-weight:600;color:var(--mist)}
+
+.bar{display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap}
+.ib{width:42px;height:42px;display:grid;place-items:center;border-radius:8px;border:1px solid rgba(195,203,230,.28);background:rgba(195,203,230,.12);color:#fff;cursor:pointer;flex:none}
+.ib:hover{background:rgba(195,203,230,.24)}
+.ib.primary{background:var(--orange);border-color:var(--orange)}
+.ib svg{width:18px;height:18px;fill:currentColor}
+.track{position:relative;flex:1 1 200px;min-width:0;height:42px;cursor:pointer;touch-action:none}
+.track .rail{position:absolute;left:0;right:0;top:50%;height:5px;margin-top:-2.5px;border-radius:3px;background:rgba(195,203,230,.2);overflow:hidden}
+.track .fill{position:absolute;inset:0 auto 0 0;width:0;background:var(--orange)}
+.track .tick{position:absolute;top:50%;width:2px;height:11px;margin-top:-5.5px;background:var(--ink);border-radius:1px}
+.time{font-size:12.5px;font-weight:700;color:var(--mist);min-width:92px;text-align:right}
+
+.stops{list-style:none;margin:0;padding:6px;background:var(--panel);border:1px solid var(--line);border-radius:10px;
+  max-height:min(70vh,560px);overflow-y:auto;display:flex;flex-direction:column;gap:2px}
+.stops li{display:block}
+.stop{width:100%;display:grid;grid-template-columns:28px 64px minmax(0,1fr);gap:10px;align-items:center;text-align:left;
+  padding:7px 8px;border-radius:7px;border:0;background:transparent;color:#fff;cursor:pointer}
+.stop:hover{background:rgba(195,203,230,.08)}
+.stop .n{font-size:11px;font-weight:800;color:var(--dim);letter-spacing:.06em}
+.stop img{width:64px;height:40px;object-fit:cover;border-radius:4px;opacity:.85}
+.stop .t{font-size:14px;font-weight:800;line-height:1.2}
+.stop .z{display:block;font-size:11.5px;font-weight:600;color:var(--dim);margin-top:2px}
+.stop[aria-current="true"]{background:rgba(242,108,13,.16)}
+.stop[aria-current="true"] .n{color:var(--orange)}
+.stop[aria-current="true"] img{opacity:1;outline:2px solid var(--orange);outline-offset:1px}
+@media (max-width:980px){
+  .stops{flex-direction:row;overflow-x:auto;overflow-y:hidden;max-height:none;scroll-snap-type:x proximity}
+  .stops li{flex:none;scroll-snap-align:start}
+  .stop{grid-template-columns:1fr;width:132px;gap:6px}
+  .stop .n{display:none}.stop img{width:100%;height:72px}
+}
+.hint{margin:12px 0 0;font-size:12.5px;color:var(--dim)}
+
+/* ---------- pièces ---------- */
+.rooms{margin-top:34px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media (max-width:900px){.rooms{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.rooms{grid-template-columns:minmax(0,1fr)}}
+.room{position:relative;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;
+  text-align:left;color:#fff;padding:0;cursor:pointer}
+.room .im{position:relative;aspect-ratio:16/10;overflow:hidden}
+.room .im img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.room:hover .im img{transform:scale(1.05)}
+.room .play{position:absolute;right:12px;bottom:12px;display:flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.12em;
+  background:rgba(5,14,38,.78);padding:6px 10px;border-radius:999px}
+.room .play svg{width:10px;height:10px;fill:var(--orange)}
+.room .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:4px;flex:1}
+.room .row1{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.room h3{margin:0;font-size:19px;font-weight:900}
+.room .m2{font-size:19px;font-weight:900;color:var(--orange-soft);white-space:nowrap}
+.room p{margin:2px 0 0;font-size:14px;color:var(--mist);font-weight:500}
+
+/* ---------- surfaces ---------- */
+.surf{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:clamp(28px,5vw,64px);align-items:center}
+@media (max-width:860px){.surf{grid-template-columns:minmax(0,1fr)}}
+.table{background:var(--navy);border-radius:10px;padding:clamp(18px,3vw,30px)}
+.trow{display:grid;grid-template-columns:minmax(0,9rem) minmax(0,1fr) 6.2rem;gap:14px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}
+.trow .k{font-size:14.5px;font-weight:700;color:#e7ebf7}
+.trow .b{height:10px;border-radius:5px;background:rgba(195,203,230,.14);overflow:hidden}
+.trow .b i{display:block;height:100%;background:var(--orange);border-radius:5px}
+.trow .v{font-size:15px;font-weight:900;text-align:right}
+.trow.total{border-bottom:0;border-top:3px solid var(--orange);margin-top:10px;padding-top:16px}
+.trow.total .k{font-weight:800;letter-spacing:.08em;font-size:13px}
+.trow.total .v{font-size:24px;color:var(--orange-soft);grid-column:2/4}
+@media (max-width:480px){.trow{grid-template-columns:minmax(0,1fr) 5.6rem}.trow .b{display:none}.trow.total .v{grid-column:2}}
+.note{margin:14px 0 0;font-size:12.5px;color:var(--dim)}
+.plan{margin:0;background:#fff;border-radius:10px;padding:clamp(10px,2vw,20px);max-width:560px;justify-self:center;width:100%}
+.plan img{width:100%;height:auto}
+.plan figcaption{margin-top:10px;font-size:13px;font-weight:600;color:var(--navy)}
+.plan figcaption a{color:#c4520a;font-weight:800}
+.surf{align-items:start}
+
+/* ---------- atouts ---------- */
+.feats{margin-top:34px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--line)}
+@media (max-width:860px){.feats{grid-template-columns:minmax(0,1fr)}}
+.feat{padding:24px 24px 26px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:40px minmax(0,1fr);gap:14px}
+.feat svg{width:30px;height:30px;stroke:var(--orange);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.feat h3{margin:0;font-size:17px;font-weight:800}
+.feat p{margin:6px 0 0;font-size:14.5px;color:var(--mist);font-weight:500}
+
+/* ---------- conditions & contact ---------- */
+.band{background:var(--navy);border-block:1px solid var(--line)}
+.cond{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:start}
+@media (max-width:860px){.cond{grid-template-columns:minmax(0,1fr)}}
+.price small{display:block;font-size:13px;font-weight:800;letter-spacing:.24em;color:var(--mist)}
+.price .big{margin-top:10px;font-size:clamp(40px,6.4vw,74px);font-weight:900;line-height:.95;color:var(--orange-soft);letter-spacing:-.02em}
+.price .big span{display:block;font-size:.42em;letter-spacing:.04em;color:#fff;margin-top:6px}
+.price i{display:inline-block;margin-top:14px;font-style:normal;font-size:12.5px;font-weight:800;letter-spacing:.2em;color:var(--mist);border:1px solid var(--line);padding:6px 10px;border-radius:999px}
+.rows{display:flex;flex-direction:column}
+.r{display:flex;align-items:baseline;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.r .k{flex:1;font-size:15px;font-weight:600;color:#e7ebf7}
+.r .v{font-size:17px;font-weight:900;text-align:right}
+
+.contact{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:center}
+@media (max-width:860px){.contact{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 22px}
+.cline{display:flex;align-items:center;gap:12px;padding:16px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.cline:last-child{border-bottom:0}
+.cline .lbl{width:100%;font-size:11px;font-weight:800;letter-spacing:.22em;color:var(--dim)}
+.cline .val{flex:1;min-width:0;font-size:clamp(17px,2vw,21px);font-weight:800;overflow-wrap:anywhere;user-select:all}
+.copy{flex:none;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(195,203,230,.12);
+  border:1px solid rgba(195,203,230,.28);border-radius:6px;padding:7px 11px;cursor:pointer}
+.copy:hover{background:rgba(195,203,230,.22)}
+.copy.ok{background:var(--orange);border-color:var(--orange)}
+footer{padding-block:28px 40px;border-top:1px solid var(--line);color:var(--dim);font-size:13px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+
+.lvl{margin:34px 0 0;font-size:13px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--mist);display:flex;align-items:center;gap:12px}
+.lvl::after{content:"";flex:1;height:1px;background:var(--line)}
+#pieces .rooms{margin-top:16px}
+.levels{margin-top:30px;display:flex;flex-direction:column;gap:40px}
+.level{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(24px,4vw,48px);align-items:start}
+@media (max-width:860px){.level{grid-template-columns:minmax(0,1fr)}}
+.level .table{margin-top:14px}
+.level .plan{max-width:none;padding:0;overflow:hidden;background:var(--panel)}
+.level .plan img{border-radius:10px 10px 0 0}
+.level .plan figcaption{color:var(--mist);padding:10px 14px 12px;margin:0}
+nav.menu a.switch{color:#fff;border:1px solid rgba(195,203,230,.32)}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="KATOS Construction, retour en haut"><img src="media/logo.png" alt="KATOS Construction"></a>
+    <nav class="menu" aria-label="Sections">
+      <a href="#pieces">Pièces</a>
+      <a href="#surfaces">Surfaces</a>
+      <a href="#atouts">Atouts</a>
+      <a href="#delais">Délais</a>
+      <a href="#contact">Contact</a>
+      <a class="switch" href="/">Villa ZAHRA · F3</a>
+      <a class="cta" href="#visite">Visite</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="ph" role="img" aria-label="Façade de la villa AICHA"></div>
+    <div class="wrap">
+      <div class="kicker">AS SALAM SA KEUR · VILLA F6</div>
+      <div class="l1">VILLA</div>
+      <h1>AICHA</h1>
+      <div class="rule"></div>
+      <p>Le standing familial : un duplex de cinq chambres pour bâtir un patrimoine et créer un foyer durable sur plusieurs générations.</p>
+      <div class="actions">
+        <a class="btn primary" href="#visite" id="heroPlay"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg>Lancer la visite</a>
+        <a class="btn" href="#contact">Nous contacter</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="facts">
+    <div class="wrap">
+      <div class="fact"><div class="v">5 chambres</div><div class="k">Dont une suite avec dressing</div></div>
+      <div class="fact"><div class="v">5 salles d’eau</div><div class="k">Salles de bain et toilettes</div></div>
+      <div class="fact"><div class="v">Duplex</div><div class="k">Fondations prévues R+2</div></div>
+      <div class="fact"><div class="v num">150 m²</div><div class="k">Terrain minimum</div></div>
+      <div class="fact"><div class="v num">18 mois</div><div class="k">Délai de livraison</div></div>
+    </div>
+  </div>
+
+  <!-- ================= VISITE ================= -->
+  <section id="visite">
+    <div class="wrap">
+      <div class="eyebrow">Visite virtuelle</div>
+      <h2 class="sec">Entrez dans la villa, étage par étage</h2>
+      <p class="lede">Un parcours continu de 5 minutes : le rez-de-chaussée, l’étage, puis la villa vue du ciel. Choisissez une étape dans la liste pour y aller directement.</p>
+
+      <div class="tour">
+        <div class="player">
+          <div class="screen" id="screen">
+            <video id="vid" playsinline muted preload="metadata" poster="media/facade-v.jpg"></video>
+            <div class="scrim"></div>
+            <div class="counter" aria-live="polite"><i></i><span id="ctr" class="num">01 / 21</span></div>
+            <div class="cap out" id="cap"></div>
+            <button class="start" id="start" type="button" aria-label="Démarrer la visite virtuelle">
+              <span class="disc"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></span>
+              <b>Démarrer la visite</b>
+              <span>21 étapes · environ 5 min</span>
+            </button>
+          </div>
+          <div class="bar">
+            <button class="ib primary" id="play" type="button" aria-label="Lecture"><svg viewBox="0 0 24 24" id="playIco"><path d="M7 4.5v15l13-7.5z"/></svg></button>
+            <button class="ib" id="prev" type="button" aria-label="Étape précédente"><svg viewBox="0 0 24 24"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
+            <button class="ib" id="next" type="button" aria-label="Étape suivante"><svg viewBox="0 0 24 24"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button>
+            <div class="track" id="track" role="slider" tabindex="0" aria-label="Progression de la visite" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <div class="rail"><div class="fill" id="fill"></div></div>
+            </div>
+            <span class="time num" id="time">0:00 / 5:13</span>
+            <button class="ib" id="fs" type="button" aria-label="Plein écran"><svg viewBox="0 0 24 24"><path d="M4 4h6v2H6v4H4zm10 0h6v6h-2V6h-4zM4 14h2v4h4v2H4zm14 4v-4h2v6h-6v-2z"/></svg></button>
+          </div>
+          <p class="hint">Raccourcis : espace pour lecture/pause, flèches gauche et droite pour changer d’étape.</p>
+        </div>
+        <ol class="stops" id="stops" aria-label="Étapes de la visite"></ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PIÈCES ================= -->
+  <section id="pieces" style="padding-top:0">
+    <div class="wrap">
+      <div class="eyebrow">Les pièces</div>
+      <h2 class="sec">Ce que vous trouverez à l’intérieur</h2>
+      <p class="lede">Surfaces relevées sur les plans. Touchez une pièce pour la voir dans la visite.</p>
+      <h3 class="lvl">Rez-de-chaussée</h3>
+      <div class="rooms" id="rooms-rdc"></div>
+      <h3 class="lvl">Étage</h3>
+      <div class="rooms" id="rooms-etage"></div>
+    </div>
+  </section>
+
+  <!-- ================= SURFACES ================= -->
+  <section id="surfaces" class="band">
+    <div class="wrap">
+      <div class="eyebrow">Les plans et les surfaces</div>
+      <h2 class="sec">Deux niveaux pour toute la famille</h2>
+      <p class="lede">Au rez-de-chaussée, les pièces de vie et deux chambres. À l’étage, la suite parentale avec son dressing et sa terrasse, deux chambres et un séjour. Le toit-terrasse ajoute 101,41 m² à ciel ouvert.</p>
+      <div class="levels">
+        <div class="level">
+          <div><h3 class="lvl" style="margin-top:0">Rez-de-chaussée</h3><div class="table" id="table-rdc"></div></div>
+          <figure class="plan"><img src="media/plan3d-rdc.jpg" alt="Plan 3D du rez-de-chaussée de la villa AICHA" loading="lazy" width="1920" height="1357"><figcaption>Vue en plan 3D du rez-de-chaussée</figcaption></figure>
+        </div>
+        <div class="level">
+          <div><h3 class="lvl" style="margin-top:0">Étage</h3><div class="table" id="table-etage"></div></div>
+          <figure class="plan"><img src="media/plan3d-etage.jpg" alt="Plan 3D de l’étage de la villa AICHA" loading="lazy" width="1920" height="1357"><figcaption>Vue en plan 3D de l’étage</figcaption></figure>
+        </div>
+      </div>
+      <p class="note">Surfaces cotées sur les plans. Le séjour de l’étage, la toilette de la chambre 3, les cours et le toit-terrasse sont hors de ces totaux. Terrain de 10 × 15 m.</p>
+    </div>
+  </section>
+
+  <!-- ================= ATOUTS ================= -->
+  <section id="atouts">
+    <div class="wrap">
+      <div class="eyebrow">Le programme As Salam Sa Keur</div>
+      <h2 class="sec">Spacieuse et élégante</h2>
+      <p class="lede">Parfaite pour les familles nombreuses ou les personnes qui recherchent un confort optimal.</p>
+      <div class="feats">
+        <div class="feat"><svg viewBox="0 0 32 32"><path d="M4 27h24M7 27V12l9-7 9 7v15M7 19h18"/><path d="M7 7V3M25 7V3M7 3h18" stroke-dasharray="2 2.5"/></svg><div><h3>Prête pour un étage de plus</h3><p>Fondations prévues pour un R+2 : la villa peut encore grandir.</p></div></div>
+        <div class="feat"><svg viewBox="0 0 32 32"><path d="M6 24V12h20v12M4 24h24M6 18h20M10 12V8h5v4"/></svg><div><h3>Une suite parentale</h3><p>19,08 m² avec dressing, salle d’eau privée et accès à une terrasse de 9,56 m².</p></div></div>
+        <div class="feat"><svg viewBox="0 0 32 32"><rect x="4" y="7" width="24" height="18" rx="1"/><path d="M15 7v18M15 16h13"/></svg><div><h3>Trois espaces de vie</h3><p>Salon et espace famille au rez-de-chaussée, séjour à l’étage.</p></div></div>
+        <div class="feat"><svg viewBox="0 0 32 32"><path d="M6 10h20v6H6zM8 16v10M24 16v10M12 10V6h8v4"/></svg><div><h3>Cuisine ouverte</h3><p>9 m² ouverts sur l’espace famille, avec coin repas.</p></div></div>
+        <div class="feat"><svg viewBox="0 0 32 32"><path d="M10 6h12v6a6 6 0 0 1-12 0zM16 18v8M11 26h10"/></svg><div><h3>Cinq salles d’eau</h3><p>Salle de bain et toilette visiteur en bas, trois salles d’eau à l’étage.</p></div></div>
+        <div class="feat"><svg viewBox="0 0 32 32"><path d="M4 12h24v14H4zM4 12l4-6h16l4 6"/><path d="M16 26V17"/></svg><div><h3>Toit-terrasse de 101 m²</h3><p>Une grande surface extérieure en plus des cours avant et arrière.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DÉLAIS ================= -->
+  <section id="delais" class="band">
+    <div class="wrap cond">
+      <div>
+        <div class="eyebrow">Calendrier du projet</div>
+        <h2 class="sec">De l’étude du terrain à la remise des clés</h2>
+      </div>
+      <div>
+        <div class="rows">
+          <div class="r"><span class="k">Étude de conformité du terrain</span><span class="v num">2 mois</span></div>
+          <div class="r"><span class="k">Livraison</span><span class="v num">18 mois</span></div>
+        </div>
+        <p class="note">Le délai de livraison court à partir de la validation du terrain.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact">
+    <div class="wrap contact">
+      <div>
+        <div class="eyebrow">KATOS Construction</div>
+        <h2 class="sec">Parlons de votre villa</h2>
+        <p class="lede">Étude technique, construction aux normes, suivi du chantier à distance via KATOS&nbsp;CONNECT.</p>
+        <div class="actions"><a class="btn" href="#visite">Revoir la visite</a><a class="btn" href="/">Voir la villa ZAHRA (F3)</a></div>
+      </div>
+      <div class="card">
+        <div class="cline"><span class="lbl">SERVICE COMMERCIAL</span><span class="val num" id="tel">+221 77 032 69 90</span><button class="copy" type="button" data-copy="tel">Copier</button></div>
+        <div class="cline"><span class="lbl">E-MAIL</span><span class="val" id="mail">contact@katosconsulting.com</span><button class="copy" type="button" data-copy="mail">Copier</button></div>
+        <div class="cline"><span class="lbl">SITE WEB</span><a class="val" id="web" href="https://www.katosconsulting.com" target="_blank" rel="noopener">www.katosconsulting.com</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Villa AICHA · F6 · Programme As Salam Sa Keur</span>
+    <span>© KATOS Construction · Images de synthèse non contractuelles</span>
+  </div>
+</footer>
+
+<script>
+/* ---------- données ---------- */
+const CLIPS = [
+  {src:'videos/01-rdc.mp4',       dur:156.0},
+  {src:'videos/02-etage.mp4',     dur:142.0},
+  {src:'videos/03-exterieur.mp4', dur:14.7}
+];
+const R='Rez-de-chaussée', E='Étage', X='Extérieur';
+const STOPS = [
+  {id:'facade',   clip:0, t:0,   zone:X, title:'Façade principale', img:'facade-v', note:'Une façade contemporaine sur deux niveaux, balcon filant à l’étage.'},
+  {id:'entree',   clip:0, t:29,  zone:X, title:'Entrée',            img:'entree',   note:'On entre par la cour avant, à côté du salon.'},
+  {id:'famille',  clip:0, t:47,  zone:R, title:'Espace famille',    img:'famille',  m2:'18,04 m²', note:'Le cœur du rez-de-chaussée, qui distribue toutes les pièces.', room:true, lvl:'rdc'},
+  {id:'salon',    clip:0, t:54,  zone:R, title:'Salon',             img:'salon',    m2:'21,07 m²', note:'La plus grande pièce de la villa, côté façade.', room:true, lvl:'rdc'},
+  {id:'ch-rdc2',  clip:0, t:73,  zone:R, title:'Chambre 2',         img:'chambre-rdc2', m2:'14,78 m²', note:'Chambre spacieuse, avec la salle de bain à côté.', room:true, lvl:'rdc'},
+  {id:'sdb',      clip:0, t:84,  zone:R, title:'Salle de bain',     img:'sdb',      m2:'5,19 m²', note:'Salle de bain du rez-de-chaussée.', room:true, lvl:'rdc'},
+  {id:'cuisine',  clip:0, t:101, zone:R, title:'Cuisine ouverte',   img:'cuisine',  m2:'9,00 m²', note:'Ouverte sur l’espace famille, avec coin repas.', room:true, lvl:'rdc'},
+  {id:'ch-rdc1',  clip:0, t:117, zone:R, title:'Chambre 1',         img:'chambre-rdc1', m2:'10,05 m²', note:'Chambre côté cour arrière, près de l’escalier.', room:true, lvl:'rdc'},
+  {id:'toil-v',   clip:0, t:135, zone:R, title:'Toilette visiteur', img:'toilette-v', m2:'3,08 m²', note:'Près de la sortie vers la cour arrière.', room:true, lvl:'rdc'},
+  {id:'cour',     clip:0, t:144, zone:X, title:'Cour arrière',      img:'cour',     note:'Un extérieur privé à l’arrière de la villa.'},
+  {id:'escalier', clip:1, t:0,   zone:E, title:'Escalier',          img:'escalier', note:'L’escalier mène au hall de l’étage.'},
+  {id:'hall',     clip:1, t:10, zone:E, title:'Hall',      img:'hall',     m2:'10,90 m²', note:'Il dessert les trois chambres de l’étage.', room:true, lvl:'etage'},
+  {id:'ch-e1',    clip:1, t:17,  zone:E, title:'Chambre 3',         img:'chambre-e1', m2:'10,56 m²', note:'Chambre près de l’escalier, avec une toilette voisine.', room:true, lvl:'etage'},
+  {id:'suite',    clip:1, t:45,  zone:E, title:'Suite parentale',   img:'suite',    m2:'19,08 m²', note:'La plus grande chambre, avec dressing et salle d’eau.', room:true, lvl:'etage'},
+  {id:'terrasse', clip:1, t:54,  zone:E, title:'Terrasse',          img:'terrasse', m2:'9,56 m²', note:'Terrasse en façade, accessible depuis la suite.', room:true, lvl:'etage'},
+  {id:'dressing', clip:1, t:63,  zone:E, title:'Dressing',          img:'dressing', m2:'5,83 m²', note:'Rangement attenant à la suite.', room:true, lvl:'etage'},
+  {id:'toil-s',   clip:1, t:69,  zone:E, title:'Salle d’eau de la suite', img:'toilette-suite', m2:'4,10 m²', note:'Douche, lavabo et WC.', room:true, lvl:'etage'},
+  {id:'ch-e2',    clip:1, t:87,  zone:E, title:'Chambre 4',         img:'chambre-e2', m2:'9,37 m²', note:'Chambre avec sa salle d’eau à côté.', room:true, lvl:'etage'},
+  {id:'toil-e',   clip:1, t:101, zone:E, title:'Salle d’eau',       img:'toilette-e', m2:'3,82 m²', note:'Douche, lavabo et WC.', room:true, lvl:'etage'},
+  {id:'sejour',   clip:1, t:119, zone:E, title:'Séjour de l’étage', img:'sejour',   note:'Un second espace de vie, au calme, à l’étage.', room:true, lvl:'etage'},
+  {id:'aerien',   clip:2, t:0,   zone:X, title:'Vue aérienne',      img:'aerien',   note:'Le toit-terrasse de 101,41 m² et l’implantation sur la parcelle.'}
+];
+
+/* ---------- utilitaires ---------- */
+const $ = id => document.getElementById(id);
+const pad = n => String(n).padStart(2,'0');
+const fmt = s => { s=Math.max(0,Math.round(s)); return Math.floor(s/60)+':'+pad(s%60); };
+const offs = []; CLIPS.reduce((a,c,i)=>(offs[i]=a, a+c.dur),0);
+const TOTAL = offs[CLIPS.length-1] + CLIPS[CLIPS.length-1].dur;
+const gStart = s => offs[s.clip] + s.t;
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- construction des listes ---------- */
+const stopsEl = $('stops');
+STOPS.forEach((s,i)=>{
+  const li=document.createElement('li');
+  li.innerHTML=`<button class="stop" type="button" data-i="${i}">
+    <span class="n num">${pad(i+1)}</span><img src="media/${s.img}.jpg" alt="" loading="lazy">
+    <span><span class="t">${s.title}</span><span class="z">${s.m2 ? s.m2 : s.zone}</span></span></button>`;
+  stopsEl.appendChild(li);
+});
+stopsEl.addEventListener('click',e=>{ const b=e.target.closest('.stop'); if(b) goStop(+b.dataset.i, true); });
+
+/* ---------- lecteur ---------- */
+const vid=$('vid'), cap=$('cap'), ctr=$('ctr'), fill=$('fill'), track=$('track'), timeEl=$('time'), startBtn=$('start');
+let clip=-1, cur=-1, pendingSeek=null, started=false;
+const NN=pad(STOPS.length);
+
+STOPS.forEach(s=>{ const tk=document.createElement('span'); tk.className='tick'; tk.style.left=(gStart(s)/TOTAL*100)+'%'; track.appendChild(tk); });
+
+function loadClip(c, t, autoplay){
+  if(c!==clip){
+    clip=c; pendingSeek=t; vid.src=CLIPS[c].src; vid.load();
+    if(autoplay) vid.play().catch(()=>{});
+  } else {
+    try{ vid.currentTime=t; }catch(e){}
+    if(autoplay) vid.play().catch(()=>{});
+  }
+}
+vid.addEventListener('loadedmetadata',()=>{ if(pendingSeek!=null){ try{vid.currentTime=pendingSeek;}catch(e){} pendingSeek=null; } });
+vid.addEventListener('ended',()=>{ if(clip<CLIPS.length-1) loadClip(clip+1,0,true); else { setPlayIcon(); } });
+vid.addEventListener('play',setPlayIcon); vid.addEventListener('pause',setPlayIcon);
+vid.addEventListener('timeupdate',tick);
+
+function stopAt(c,t){
+  let k=0;
+  STOPS.forEach((s,i)=>{ if(s.clip<c || (s.clip===c && s.t<=t+0.05)) k=i; });
+  return k;
+}
+function show(i){
+  if(i===cur) return; cur=i;
+  const s=STOPS[i];
+  ctr.textContent=pad(i+1)+' / '+NN;
+  cap.classList.add('out');
+  setTimeout(()=>{
+    cap.innerHTML=`<div class="eyebrow">${s.zone}</div><h3>${s.title}</h3>${s.m2?`<div class="m2 num">${s.m2}</div>`:''}<p>${s.note}</p>`;
+    requestAnimationFrame(()=>cap.classList.remove('out'));
+  }, reduced?0:260);
+  [...stopsEl.querySelectorAll('.stop')].forEach((b,j)=>b.setAttribute('aria-current', j===i?'true':'false'));
+  const act=stopsEl.querySelector('[aria-current="true"]');
+  if(act){ const li=act.parentElement, box=stopsEl;
+    if(box.scrollWidth>box.clientWidth) box.scrollTo({left:li.offsetLeft-box.clientWidth/2+li.offsetWidth/2,behavior:reduced?'auto':'smooth'});
+    else box.scrollTo({top:li.offsetTop-box.clientHeight/2+li.offsetHeight/2,behavior:reduced?'auto':'smooth'}); }
+}
+function tick(){
+  if(clip<0) return;
+  const t=vid.currentTime||0, g=offs[clip]+t;
+  fill.style.width=(g/TOTAL*100).toFixed(2)+'%';
+  track.setAttribute('aria-valuenow',Math.round(g/TOTAL*100));
+  timeEl.textContent=fmt(g)+' / '+fmt(TOTAL);
+  if(pendingSeek==null) show(stopAt(clip,t));
+}
+function begin(){ if(started) return; started=true; startBtn.hidden=true; }
+function goStop(i, play){
+  begin(); i=Math.max(0,Math.min(STOPS.length-1,i));
+  const s=STOPS[i]; loadClip(s.clip, s.t, play); show(i);
+}
+function seekGlobal(g){
+  begin(); g=Math.max(0,Math.min(TOTAL-0.1,g));
+  let c=0; for(let k=0;k<CLIPS.length;k++) if(g>=offs[k]) c=k;
+  const wasPlaying=!vid.paused || clip<0;
+  loadClip(c, g-offs[c], wasPlaying); show(stopAt(c,g-offs[c]));
+}
+function setPlayIcon(){
+  $('playIco').innerHTML = vid.paused ? '<path d="M7 4.5v15l13-7.5z"/>' : '<path d="M6 4h4v16H6zM14 4h4v16h-4z"/>';
+  $('play').setAttribute('aria-label', vid.paused ? 'Lecture' : 'Pause');
+}
+function toggle(){
+  if(!started){ goStop(0,true); return; }
+  if(vid.paused){ if(clip===CLIPS.length-1 && vid.ended){ goStop(0,true); } else vid.play().catch(()=>{}); }
+  else vid.pause();
+}
+startBtn.onclick=()=>goStop(0,true);
+$('heroPlay').addEventListener('click',()=>setTimeout(()=>{ if(!started) goStop(0,true); }, reduced?0:450));
+$('play').onclick=toggle;
+$('next').onclick=()=>goStop((cur<0?-1:cur)+1,true);
+$('prev').onclick=()=>{
+  if(cur<0) return goStop(0,true);
+  const s=STOPS[cur], local=(vid.currentTime||0)-s.t;
+  goStop(local<1.5 && s.clip===clip ? cur-1 : cur, true);
+};
+$('fs').onclick=()=>{
+  const el=$('screen');
+  if(document.fullscreenElement){ document.exitFullscreen?.(); return; }
+  if(el.requestFullscreen) el.requestFullscreen().catch(()=>{});
+  else if(vid.webkitEnterFullscreen) vid.webkitEnterFullscreen();
+};
+function trackPos(e){ const r=track.getBoundingClientRect(); return (e.clientX-r.left)/r.width*TOTAL; }
+let dragging=false;
+track.addEventListener('pointerdown',e=>{ dragging=true; track.setPointerCapture(e.pointerId); seekGlobal(trackPos(e)); });
+track.addEventListener('pointerup',e=>{ if(dragging){ dragging=false; seekGlobal(trackPos(e)); } });
+track.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowLeft'){ e.preventDefault(); e.stopPropagation();
+    const g=(clip<0?0:offs[clip]+vid.currentTime)+(e.key==='ArrowRight'?5:-5); seekGlobal(g); }
+});
+addEventListener('keydown',e=>{
+  if(e.target.closest('input,textarea')) return;
+  const r=$('visite').getBoundingClientRect(); if(r.bottom<0||r.top>innerHeight) return;
+  if(e.key===' ' && !e.target.closest('button,a')){ e.preventDefault(); toggle(); }
+  else if(e.key==='ArrowRight' && e.target!==track){ $('next').click(); }
+  else if(e.key==='ArrowLeft' && e.target!==track){ $('prev').click(); }
+});
+
+/* état initial : première étape affichée, vidéo prête */
+clip=0; vid.src=CLIPS[0].src; show(0); timeEl.textContent='0:00 / '+fmt(TOTAL);
+
+/* ---------- copier ---------- */
+document.querySelectorAll('.copy').forEach(b=>{
+  b.onclick=()=>{
+    const el=$(b.dataset.copy), txt=el.textContent.trim();
+    const done=()=>{ b.textContent='Copié'; b.classList.add('ok'); setTimeout(()=>{b.textContent='Copier'; b.classList.remove('ok');},1600); };
+    const sel=()=>{ const r=document.createRange(); r.selectNodeContents(el); const s=getSelection(); s.removeAllRanges(); s.addRange(r); };
+    try{ navigator.clipboard.writeText(txt).then(done, sel); }catch(e){ sel(); }
+  };
+});
+
+/* ---------- pièces et surfaces ---------- */
+function roomCard(i){
+  const s=STOPS[i]; const b=document.createElement('button'); b.type='button'; b.className='room';
+  b.innerHTML=`<div class="im"><img src="media/${s.img}.jpg" alt="${s.title} de la villa AICHA" loading="lazy">
+    <span class="play"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg>VOIR</span></div>
+    <div class="body"><div class="row1"><h3>${s.title}</h3><span class="m2 num">${s.m2||''}</span></div><p>${s.note}</p></div>`;
+  b.onclick=()=>{ document.getElementById('visite').scrollIntoView({behavior:reduced?'auto':'smooth'}); goStop(i,true); };
+  return b;
+}
+const ORDER={rdc:['salon','famille','ch-rdc2','ch-rdc1','cuisine','sdb','toil-v','cour','entree'],
+             etage:['suite','hall','ch-e1','ch-e2','sejour','terrasse','dressing','toil-s','toil-e']};
+const CARDS={rdc:['salon','famille','ch-rdc2','ch-rdc1','cuisine','sdb'], etage:['suite','sejour','hall','ch-e1','ch-e2','terrasse']};
+const idx=id=>STOPS.findIndex(s=>s.id===id);
+['rdc','etage'].forEach(l=>{ const el=$('rooms-'+l); CARDS[l].forEach(id=>el.appendChild(roomCard(idx(id)))); });
+const num=m=>parseFloat(m.replace(',','.'));
+const f2=v=>v.toFixed(2).replace('.',',')+' m²';
+['rdc','etage'].forEach(l=>{
+  const rows=ORDER[l].map(id=>STOPS[idx(id)]).filter(s=>s.m2 && s.id!=='terrasse');
+  const max=Math.max(...rows.map(s=>num(s.m2)));
+  const el=$('table-'+l);
+  rows.sort((a,b)=>num(b.m2)-num(a.m2)).forEach(s=>el.insertAdjacentHTML('beforeend',
+    `<div class="trow"><span class="k">${s.title}</span><span class="b"><i style="width:${(num(s.m2)/max*100).toFixed(1)}%"></i></span><span class="v num">${s.m2}</span></div>`));
+  if(l==='etage') el.insertAdjacentHTML('beforeend',`<div class="trow"><span class="k">Séjour</span><span class="b"></span><span class="v" style="color:var(--dim);font-size:12px">non coté</span></div>`);
+  el.insertAdjacentHTML('beforeend',`<div class="trow total"><span class="k">TOTAL ${l==='rdc'?'DU REZ-DE-CHAUSSÉE':'DE L’ÉTAGE'}</span><span class="v num">${f2(rows.reduce((a,s)=>a+num(s.m2),0))}</span></div>`);
+  if(l==='etage') el.insertAdjacentHTML('beforeend',`<div class="trow"><span class="k">Terrasse</span><span class="b"></span><span class="v num">9,56 m²</span></div>`);
+});
+
+</script>
+</body>
+</html>
