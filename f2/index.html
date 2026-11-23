@@ -260,7 +260,7 @@ nav.menu a.switch{color:#fff;border:1px solid rgba(195,203,230,.32)}
       <div class="l1">VILLA</div>
       <h1 id="vname">F2</h1>
       <div class="rule"></div>
-      <p>Une villa de plain-pied avec une chambre, deux espaces de vie, une cuisine, deux salles d’eau et une cour arrière.</p>
+      <p>Une villa de plain-pied avec une chambre et sa salle de bain, un séjour, un salon, une cuisine, une toilette visiteur et un garage ouvert.</p>
       <div class="actions">
         <a class="btn primary" href="#visite" id="heroPlay"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg>Lancer la visite</a>
         <a class="btn" href="#contact">Nous contacter</a>
@@ -270,11 +270,11 @@ nav.menu a.switch{color:#fff;border:1px solid rgba(195,203,230,.32)}
 
   <div class="facts">
     <div class="wrap">
-      <div class="fact"><div class="v">Plain-pied</div><div class="k">Toit-terrasse</div></div>
-      <div class="fact"><div class="v">1 chambre</div><div class="k">Avec grand placard</div></div>
-      <div class="fact"><div class="v">2 salles d’eau</div><div class="k">Douche, lavabo et WC</div></div>
+      <div class="fact"><div class="v">1 chambre</div><div class="k">Avec salle de bain</div></div>
+      <div class="fact"><div class="v">Séjour + salon</div><div class="k">Deux espaces de vie</div></div>
       <div class="fact"><div class="v">Cuisine</div><div class="k">Avec coin repas</div></div>
-      <div class="fact"><div class="v">Cour arrière</div><div class="k">Et stationnement en façade</div></div>
+      <div class="fact"><div class="v">Toilette</div><div class="k">Visiteur, près de l’entrée</div></div>
+      <div class="fact"><div class="v">Garage ouvert</div><div class="k">En façade</div></div>
     </div>
   </div>
 
@@ -355,16 +355,16 @@ nav.menu a.switch{color:#fff;border:1px solid rgba(195,203,230,.32)}
 const CLIPS = [ {src:'/f2/videos/visite.mp4', dur:98.5} ];
 const X='Extérieur', P='Pièce', C='Circulation';
 const STOPS = [
-  {id:'facade',   clip:0, t:0,  zone:X, title:'Façade principale', img:'facade',   note:'Villa de plain-pied, place de stationnement en façade.'},
-  {id:'entree',   clip:0, t:8,  zone:X, title:'Entrée',            img:'entree',   note:'Entrée abritée, entre le stationnement et le bardage bois.'},
+  {id:'facade',   clip:0, t:0,  zone:X, title:'Façade principale', img:'facade',   note:'Villa de plain-pied, avec garage ouvert en façade.'},
+  {id:'entree',   clip:0, t:8,  zone:X, title:'Entrée',            img:'entree',   note:'Entrée abritée, à côté du garage ouvert.'},
   {id:'sejour',   clip:0, t:10, zone:P, title:'Séjour',            img:'sejour',   note:'Le premier espace de vie, dès l’entrée.', room:true},
-  {id:'sdb',      clip:0, t:20, zone:P, title:'Salle de bain',     img:'sdb',      note:'Douche, lavabo et WC.', room:true},
-  {id:'couloir',  clip:0, t:26, zone:C, title:'Dégagement',        img:'couloir',  note:'Le couloir qui mène à la chambre et au salon.'},
+  {id:'toil-v',   clip:0, t:20, zone:P, title:'Toilette visiteur', img:'sdb',      note:'Près de l’entrée, pour les invités.', room:true},
+  {id:'couloir',  clip:0, t:26, zone:C, title:'Dégagement',        img:'couloir',  note:'Il mène à la chambre, au salon et à la cuisine.'},
   {id:'chambre',  clip:0, t:37, zone:P, title:'Chambre',           img:'chambre',  note:'Chambre avec grand placard et fenêtre sur l’extérieur.', room:true},
   {id:'salon',    clip:0, t:54, zone:P, title:'Salon',             img:'salon',    note:'Un second espace de vie, avec baie vitrée.', room:true},
   {id:'cuisine',  clip:0, t:64, zone:P, title:'Cuisine',           img:'cuisine',  note:'Cuisine équipée avec coin repas, ouverte sur l’arrière.', room:true},
-  {id:'salle-eau',clip:0, t:73, zone:P, title:'Salle d’eau',       img:'salle-eau', note:'Seconde salle d’eau, près de la sortie vers la cour.'},
-  {id:'cour',     clip:0, t:80, zone:X, title:'Cour arrière',      img:'cour',     note:'Un extérieur privé et clos à l’arrière de la villa.', room:true},
+  {id:'sdb',      clip:0, t:73, zone:P, title:'Salle de bain',     img:'salle-eau', note:'Douche, lavabo et WC.', room:true},
+  {id:'cour',     clip:0, t:80, zone:X, title:'Cour arrière',      img:'cour',     note:'Un extérieur privé et clos à l’arrière de la villa.'},
   {id:'arriere',  clip:0, t:88, zone:X, title:'Façade arrière',    img:'arriere',  note:'La villa vue depuis la cour.'},
   {id:'aerien',   clip:0, t:93, zone:X, title:'Vue aérienne',      img:'aerien',   note:'Le toit-terrasse et l’implantation sur la parcelle.'}
 ];
