@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Villa F2</title>
-<meta property="og:title" content="Villa F2 · Visite virtuelle">
+<title>Villa ZEYNA</title>
+<meta property="og:title" content="Villa ZEYNA · Visite virtuelle">
 <meta property="og:image" content="/f2/media/hero.jpg">
 <link rel="icon" href="/f2/media/logo.png">
-<meta name="description" content="Visite virtuelle de la villa F2, programme As Salam Sa Keur, KATOS Construction.">
+<meta name="description" content="Visite virtuelle de la villa F2 ZEYNA, programme As Salam Sa Keur, KATOS Construction.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,900&display=swap" rel="stylesheet">
 <style>
-/* Villa F2. Même gabarit que la villa ZAHRA : un « plateau » de visite cinéma en tête, puis la fiche de la villa
+/* Villa ZEYNA (F2). Même gabarit que la villa ZAHRA : un « plateau » de visite cinéma en tête, puis la fiche de la villa
    déroulée comme un dossier de vente KATOS (pièces → surfaces → atouts → délais → contact).
    Identité KATOS conservée : bleu nuit, accent orange, Montserrat. Un seul univers sombre, assumé. */
 :root{
@@ -258,11 +258,11 @@ nav.menu a.switch{color:#fff;border:1px solid rgba(195,203,230,.32)}
 
 <main id="top">
   <div class="hero">
-    <div class="ph" role="img" aria-label="Façade de la villa F2"></div>
+    <div class="ph" role="img" aria-label="Façade de la villa ZEYNA"></div>
     <div class="wrap">
       <div class="kicker">AS SALAM SA KEUR · VILLA F2</div>
       <div class="l1">VILLA</div>
-      <h1 id="vname">F2</h1>
+      <h1 id="vname">ZEYNA</h1>
       <div class="rule"></div>
       <p>Une villa de plain-pied sur un terrain de 10 × 15 m : une chambre et sa salle de bain, un séjour, un salon, une cuisine, une toilette visiteur et un garage ouvert.</p>
       <div class="actions">
@@ -339,7 +339,7 @@ nav.menu a.switch{color:#fff;border:1px solid rgba(195,203,230,.32)}
         <div class="level">
           <div><div class="table" id="table"></div>
             <p class="note">Surfaces cotées sur le plan. Le dégagement, le garage ouvert, la cour avant et la cour arrière sont hors de ce total. Terrain de 10 × 15 m.</p></div>
-          <figure class="plan plan-white"><img src="/f2/media/plan.png" alt="Plan du rez-de-chaussée de la villa F2" loading="lazy" width="1070" height="1539"><figcaption>Vue en plan de la villa F2</figcaption></figure>
+          <figure class="plan plan-white"><img src="/f2/media/plan.png" alt="Plan du rez-de-chaussée de la villa ZEYNA" loading="lazy" width="1070" height="1539"><figcaption>Vue en plan de la villa ZEYNA (F2)</figcaption></figure>
         </div>
       </div>
     </div>
@@ -365,7 +365,7 @@ nav.menu a.switch{color:#fff;border:1px solid rgba(195,203,230,.32)}
 
 <footer>
   <div class="wrap">
-    <span>Villa F2 · Programme As Salam Sa Keur</span>
+    <span>Villa ZEYNA · F2 · Programme As Salam Sa Keur</span>
     <span>© KATOS Construction · Images de synthèse non contractuelles</span>
   </div>
 </footer>
@@ -532,7 +532,7 @@ document.querySelectorAll('.copy').forEach(b=>{
 const roomsEl=$('rooms');
 STOPS.forEach((s,i)=>{ if(!s.room) return;
   const b=document.createElement('button'); b.type='button'; b.className='room';
-  b.innerHTML=`<div class="im"><img src="/f2/media/${s.img}.jpg" alt="${s.title}" loading="lazy">
+  b.innerHTML=`<div class="im"><img src="/f2/media/${s.img}.jpg" alt="${s.title} de la villa ZEYNA" loading="lazy">
     <span class="play"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg>VOIR</span></div>
     <div class="body"><div class="row1"><h3>${s.title}</h3><span class="m2 num">${s.m2||''}</span></div><p>${s.note}</p></div>`;
   b.onclick=()=>{ document.getElementById('visite').scrollIntoView({behavior:reduced?'auto':'smooth'}); goStop(i,true); };
